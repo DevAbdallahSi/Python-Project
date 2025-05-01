@@ -25,6 +25,7 @@ class UserManager(models.Manager):
         if not EMAIL_REGEX.match(post['email_log']):    # test whether a field matches the pattern            
             errors['email_log'] = "Invalid email address!"
         return errors
+
 class TicketManager(models.Manager):
     def validate_ticket(self, postData):
         errors = {}
@@ -53,12 +54,12 @@ class User(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     role=models.CharField(max_length=50)
     location=models.CharField(max_length=50)
     google_id=models.CharField(max_length=255)
     department=models.ForeignKey(Department,related_name='users')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     objects=UserManager()
 
     def uesr_data(post):
@@ -105,3 +106,4 @@ class Ticket(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects=TicketManager()
+

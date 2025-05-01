@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,36 +10,69 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        
-    
-        #main-content {
-            margin-left: 0;
-            transition: margin-left 0.3s ease;
-            position: relative;
-            z-index: 0;
-        }
-        main{
-            margin-top: 80px;
-        }
-    
-        body {
-            overflow-x: hidden;
-        }
-    
-        header {
-            margin-left: 0;
-            z-index: 1030;
-            position: relative;
-        }
-        #navbar{
-            margin-top: 80px;
-        }
-    </style>
-    
+    <link rel="stylesheet" href="../static/css/admin_users_page.css">
+
 </head>
 
 <body class="bg-light">
+
+    <div class="modal fade" id="editUserModal">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="First name">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Last name">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Role">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Location">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary">&lt; Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteUserModal">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModalLabel">Delete User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>you are about to delete user: username</p>
+                    <p>are you sure you want to proceed ?</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary">&lt; Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <nav class="navbar navbar-expand-lg py-4 navbar-light bg-white border-bottom fixed-top shadow px-4">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="#">TicketFlow</a>
@@ -71,7 +103,7 @@
             </div>
         </div>
     </nav>
-    
+
     <div class="container-fluid">
         <div class="row">
 
@@ -99,62 +131,16 @@
                                         <td>Boss</td>
                                         <td>Boss.Admin@gmail.com</td>
                                         <td>Ramallah</td>
-                                        <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Administrator</td>
-                                        <td>Boss</td>
-                                        <td>Boss.Admin@gmail.com</td>
-                                        <td>Ramallah</td>
-                                        <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Administrator</td>
-                                        <td>Boss</td>
-                                        <td>Boss.Admin@gmail.com</td>
-                                        <td>Ramallah</td>
-                                        <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Administrator</td>
-                                        <td>Boss</td>
-                                        <td>Boss.Admin@gmail.com</td>
-                                        <td>Ramallah</td>
-                                        <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Administrator</td>
-                                        <td>Boss</td>
-                                        <td>Boss.Admin@gmail.com</td>
-                                        <td>Ramallah</td>
-                                        <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Administrator</td>
-                                        <td>Boss</td>
-                                        <td>Boss.Admin@gmail.com</td>
-                                        <td>Ramallah</td>
-                                        <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Administrator</td>
-                                        <td>Boss</td>
-                                        <td>Boss.Admin@gmail.com</td>
-                                        <td>Ramallah</td>
-                                        <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Administrator</td>
-                                        <td>Boss</td>
-                                        <td>Boss.Admin@gmail.com</td>
-                                        <td>Ramallah</td>
-                                        <td><a href="#" class="btn btn-sm btn-primary">Edit</a></td>
+                                        <td>
+                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal">Edit</button>
+                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteUserModal">Delete</button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                   
+
                 </main>
             </div>
         </div>
@@ -162,5 +148,7 @@
 
     <!-- Bootstrap JS and Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
+
 </html>
