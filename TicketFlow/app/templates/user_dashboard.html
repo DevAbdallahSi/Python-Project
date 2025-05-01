@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User's Home | TicketFlow</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+
+    main {
+      margin-top: 100px;
+    }
+
+    header {
+      margin-left: 0;
+      z-index: 1030;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    #navbar {
+      margin-top: 80px;
+    }
+  </style>
+</head>
+
+<body class="bg-light text-dark">
+
+  <!-- Navbar (from TicketFlow) -->
+  <nav class="navbar navbar-expand-lg py-4 navbar-light bg-white border-bottom fixed-top shadow px-4">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">TicketFlow</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="#"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-ticket-perforated me-1"></i> Tickets</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-inbox me-1"></i> Inbox</a>
+          </li>
+        </ul>
+        <span class="navbar-text me-4 text-muted">Welcome, User</span>
+        <button class="btn btn-outline-dark">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <div class="container-fluid">
+    <div class="row">
+      <div id="main-content" class="col-md-9 mx-auto col-lg-10 px-md-4 mt-4">
+        <main>
+
+          <!-- User Profiles -->
+          <div class="mb-5">
+            <h3 class="text-primary mb-3"><i class="bi bi-person-circle me-2"></i>User Profiles</h3>
+            <!-- Loop start -->
+            {{ for user in users }}
+            <div class="bg-white p-3 rounded mb-3 shadow-sm border">
+              <h5 class="mb-1">{{ user.name }}</h5>
+              <p class="mb-1">Job Title: {{ user.title }}</p>
+              <p class="mb-1">Location: {{ user.location }}</p>
+              <p class="mb-0">Department: {{ user.department }}</p>
+            </div>
+            {{ endfor }}
+          </div>
+
+          <!-- My Tickets -->
+          <div>
+            <h3 class="text-primary mb-3"><i class="bi bi-card-list me-2"></i>My Tickets</h3>
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">Tickets</h5>
+              </div>
+              <div class="card-body table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th>Title</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Loop start -->
+                    {{ for ticket in tickets }}
+                    <tr>
+                      <td>{{ ticket.title }}</td>
+                      <td>{{ ticket.Date }}</td>
+                      <td>
+                        {% if ticket.Status == 'Resolved' %}
+                        <span class="badge bg-success">{{ ticket.Status }}</span>
+                        {% elif ticket.Status == 'In Progress' %}
+                        <span class="badge bg-warning text-dark">{{ ticket.Status }}</span>
+                        {% elif ticket.Status == 'Open' %}
+                        <span class="badge bg-danger">{{ ticket.Status }}</span>
+                        {% else %}
+                        <span class="badge bg-secondary">{{ ticket.Status }}</span>
+                        {% endif %}
+                      </td>
+                    </tr>
+                    {{ endfor }}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
