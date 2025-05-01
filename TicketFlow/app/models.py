@@ -25,6 +25,14 @@ class UserManager(models.Manager):
         if not EMAIL_REGEX.match(post['email_log']):    # test whether a field matches the pattern            
             errors['email_log'] = "Invalid email address!"
         return errors
+class TicketManager(models.Manager):
+    def validate_ticket(self, postData):
+        errors = {}
+        if len(postData['title']) < 2:
+            errors['title'] = "Title must be at least 2 characters"
+        if len(postData['description']) < 15:
+            errors['description'] = "Description must be at least 15 characters"
+        return errors
     
 class DepartmentManager(models.Manager):
     def basic_validator(self, post):
@@ -98,3 +106,7 @@ class Ticket(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects=TicketManager()
 
+
+
+
+ 
