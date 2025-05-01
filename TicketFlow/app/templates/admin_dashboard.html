@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard | TicketFlow</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        
+    
+        #main-content {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+            position: relative;
+            z-index: 0;
+        }
+        main{
+            margin-top: 80px;
+        }
+    
+        body {
+            overflow-x: hidden;
+        }
+    
+        header {
+            margin-left: 0;
+            z-index: 1030;
+            position: relative;
+        }
+        #navbar{
+            margin-top: 80px;
+        }
+    </style>
+    
+</head>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg py-4 navbar-light bg-white border-bottom fixed-top shadow px-4">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">TicketFlow</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-ticket-detailed me-1"></i> My Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-bar-chart-line me-1"></i> Statistics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-clock-history me-1"></i> Pending Tasks</a>
+                    </li>
+                </ul>
+                <span class="navbar-text me-4 text-muted">Dept: IT Support | John Doe</span>
+                <button class="btn btn-outline-dark">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container-fluid">
+        <div class="row">
+
+            <div id="main-content" class="col-md-9 mx-auto col-lg-10 px-md-4 mt-4">
+                <main>
+                    <!-- Summary Cards -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Users</h5>
+                                    <p class="card-text fs-4">100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-success">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tickets Closed</h5>
+                                    <p class="card-text fs-4">250</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card text-white bg-warning">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tickets Open</h5>
+                                    <p class="card-text fs-4">32</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions & Activity Log -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-header">Quick Actions</div>
+                                <div class="list-group list-group-flush">
+                                    <a href="#" class="list-group-item list-group-item-action">Add Department</a>
+                                    <a href="#" class="list-group-item list-group-item-action">Approve All Tickets</a>
+                                    <a href="#" class="list-group-item list-group-item-action">Assign User to Dept.</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card h-100">
+                                <div class="card-header">Recent Activity</div>
+                                <div class="card-body">
+                                    <textarea class="form-control" rows="5" readonly>
+    - Admin created new department
+    - Resolved ticket #102
+    - Assigned user to Support
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">IT Department</div>
+                                <div class="card-body">
+                                    <canvas id="chart-it" height="180"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">HR Department</div>
+                                <div class="card-body">
+                                    <canvas id="chart-hr" height="180"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">Finance Department</div>
+                                <div class="card-body">
+                                    <canvas id="chart-finance" height="180"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tickets Table -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Department Tickets</h5>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Title</th>
+                                        <th>Status</th>
+                                        <th>Priority</th>
+                                        <th>Assigned To</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#101</td>
+                                        <td>Printer not working</td>
+                                        <td><span class="badge bg-warning text-dark">In Progress</span></td>
+                                        <td>High</td>
+                                        <td>Jane Smith</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-success"><i class="bi bi-check2-circle"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const chartOptions = {
+            type: 'bar',
+            data: {
+                labels: ['Open', 'In Progress', 'Resolved'],
+                datasets: [{
+                    label: 'Tickets',
+                    data: [5, 10, 15],
+                    backgroundColor: ['#ffc107', '#0dcaf0', '#198754'],
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        new Chart(document.getElementById('chart-it'), chartOptions);
+        new Chart(document.getElementById('chart-hr'), chartOptions);
+        new Chart(document.getElementById('chart-finance'), chartOptions);
+    </script>
+</body>
+</html>
