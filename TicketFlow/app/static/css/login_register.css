@@ -1,0 +1,10 @@
+body {
+    background: radial-gradient(circle, rgb(8, 85, 177) 30%, #010e54 99%);
+    color: white;
+    height: 100vh;
+}
+
+#login-card,
+#register-card {
+    background: #daeaf7;
+}
