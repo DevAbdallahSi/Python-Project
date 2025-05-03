@@ -200,7 +200,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form id="create_department">
+                    <form id="create_department" method="post">
                         {% csrf_token %}
                         <label for="department_name">department Name</label>
                         <input type="text" name="department_name" required><br>
@@ -251,5 +251,4 @@
         new Chart(document.getElementById('chart-finance'), chartOptions);
     </script>
 </body>
-
 </html>
