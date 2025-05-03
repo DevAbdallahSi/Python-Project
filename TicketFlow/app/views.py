@@ -18,7 +18,6 @@ def register_form(request):
             return redirect ('/')
     else:
         return redirect ('/')
-    
 def login_page(request):
     if 'user_id' in request.session:
         context={
