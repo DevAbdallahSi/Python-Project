@@ -48,19 +48,33 @@ class Department(models.Model):
     desc=models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects=DepartmentManager()
+
+    def create_department(post):
+        name=post['department_name']
+        desc=post['description']
+        new_department=Department.objects.create(name=name,desc=desc)
+        return new_department.id
+    def git_all_departmen():
+        return Department.objects.all()
+    
+    def git_departmen_by_id():
+        pass
+
 
 class User(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
-    role=models.CharField(max_length=50)
+    role=models.CharField(max_length=50 ,default='user')
     location=models.CharField(max_length=50)
     google_id=models.CharField(max_length=255)
-    department=models.ForeignKey(Department,related_name='users',on_delete=models.CASCADE)
+    department=models.ForeignKey(Department,related_name='users',on_delete=models.CASCADE ,default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects=UserManager()
+    
 
     def uesr_data(post):
         hashed_pw = bcrypt.hashpw(post['password'].encode(), bcrypt.gensalt()).decode()
@@ -81,9 +95,10 @@ class User(models.Model):
             return user
         else:
             return None
-        
+    def get_all_users():
+        return User.objects.all()
 
-class Messages(models.Model):
+class Message(models.Model):
     content=models.TextField()
     comment=models.TextField()
     user=models.ForeignKey(User,related_name='messages',on_delete=models.CASCADE)
@@ -91,11 +106,34 @@ class Messages(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def create_messages(post):
+        user = User.objects.get(id=post['user_id'])
+        department = Department.objects.get(id=post['department_id'])
+        content=post['content']
+        comment=post['comment']
+        message = Message.objects.create(content=content,comment=comment,user=user,department=department)
+        return message
+
+    def show_message():
+        return Message.objects.all()
+    
+    def get_messeges_by_user_id(user_id):
+        user=User.get_user_by_id(user_id)
+        return user.messages.all()
+    
 class Status(models.Model):
     name = models.CharField(max_length=40)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def create_status(post):
+        name =post['name']
+        status= Status.objects.create(name=name)
+        return status
+
+    def show_status():
+        return Status.objects.all() 
+    
 class Ticket(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -106,4 +144,22 @@ class Ticket(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects=TicketManager()
+
+    
+    def create_ticket(post):
+        title = post['title']
+        description = post['description']
+        priority = post['']
+        status = Status.objects.get(id=post['status_id'])
+        issuer = User.objects.get(id=post['issuer_id'])
+        assigned_to = Department.objects.get(id=post['assigned_to_id'])
+
+        ticket = Ticket.objects.create(title=title, description=description, priority=priority, status=status, issuer=issuer, assigned_to=assigned_to)
+        return ticket
+
+    def show_ticket():
+        return Ticket.objects.all()
+
+    def get_ticket_by_id(ticket_id):
+        return Ticket.objects.get(id=ticket_id)
 
