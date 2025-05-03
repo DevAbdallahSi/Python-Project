@@ -20,7 +20,7 @@ class UserManager(models.Manager):
         if User.objects.filter(email=post['email']).exists():
             errors['email'] = 'email is already exists'
         return errors
-    def basic_validator_login(post):
+    def basic_validator_login(self,post):
         errors = {}
         if not EMAIL_REGEX.match(post['email_log']):    # test whether a field matches the pattern            
             errors['email_log'] = "Invalid email address!"
@@ -69,14 +69,14 @@ class User(models.Model):
     password = models.CharField(max_length=255)
     role=models.CharField(max_length=50 ,default='user')
     location=models.CharField(max_length=50)
-    google_id=models.CharField(max_length=255)
-    department=models.ForeignKey(Department,related_name='users',on_delete=models.CASCADE ,default=None)
+    google_id=models.CharField(max_length=255,null=True, blank=True)
+    department=models.ForeignKey(Department,related_name='users',on_delete=models.CASCADE ,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects=UserManager()
     
 
-    def uesr_data(post):
+    def register(post):
         hashed_pw = bcrypt.hashpw(post['password'].encode(), bcrypt.gensalt()).decode()
         first_name=post['first_name']
         last_name=post['last_name']
@@ -95,6 +95,7 @@ class User(models.Model):
             return user
         else:
             return None
+        
     def get_all_users():
         return User.objects.all()
 
@@ -162,4 +163,3 @@ class Ticket(models.Model):
 
     def get_ticket_by_id(ticket_id):
         return Ticket.objects.get(id=ticket_id)
-

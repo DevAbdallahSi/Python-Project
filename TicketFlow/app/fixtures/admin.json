@@ -1,0 +1,16 @@
+[
+    {
+        "model": "app.user",
+        "pk": 1 ,
+        "fields": {
+            "first_name": "Admin",
+            "last_name": "Admin",
+            "password": "$2b$12$UDXRzfDnQGES12EWkveFaOjXAdSh7KZ45j7r27ZN6xwVgchGha1xe",
+            "email": "Admin@Admin.com",
+            "role": "admin",
+            "location": "Ramallah",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    }
+]

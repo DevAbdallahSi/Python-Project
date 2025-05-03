@@ -38,7 +38,7 @@ def register_form(request):
                 messages.error(request, v)
             return redirect('/landing')
         else:
-            new=models.uesr_data(request.POST)
+            new=models.User.register(request.POST)
             request.session['user_id']=new
             return redirect ('/landing')
     else:
@@ -67,7 +67,8 @@ def login_form(request):
                 return redirect('/dashboard')
             else:
                 messages.error(request,'rong email or password')
-                return redirect('/')
+                return redirect('/landing')
+            
 def logout(request):
     if 'user_id' in request.session:
         request.session.flush() 
