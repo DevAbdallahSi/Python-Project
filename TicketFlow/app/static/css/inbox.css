@@ -1,0 +1,15 @@
+body {
+    overflow-x: hidden;
+  }
+
+  main {
+    margin-top: 100px;
+  }
+
+  header {
+    margin-left: 0;
+    z-index: 1030;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }

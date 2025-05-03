@@ -10,40 +10,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
-  <style>
-    body {
-      overflow-x: hidden;
-    }
-
-    main {
-      margin-top: 100px;
-    }
-
-    header {
-      margin-left: 0;
-      z-index: 1030;
-      position: fixed;
-      top: 0;
-      width: 100%;
-    }
-
-    /* تغيير الخلفية لحقل البحث */
-    .search-box input {
-      background-color: #f4f6f9 !important; /* تغيير الخلفية الى لون فاتح غير الأبيض */
-      border: 1px solid #ccc; /* حد خفيف حول حقل البحث */
-    }
-
-    /* تغيير الخلفية في الجدول */
-    .table td,
-    .table th {
-      background-color: #f9f9f9; /* تغيير خلفية الخلايا الى لون فاتح */
-    }
-
-    .table-hover tbody tr:hover {
-      background-color: #e0e0e0; /* عند التمرير على الصف */
-    }
-  </style>
+  {% load static%}
+  <link rel="stylesheet" href="{% static 'css/admin_all_tickets.css' %}">
 </head>
 
 <body class="bg-light text-dark">
@@ -60,22 +28,34 @@
       <div class="collapse navbar-collapse" id="navbarMenu">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" href="#"><i class="bi bi-house-door me-1"></i> Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bi bi-files me-1"></i> All Tickets</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bi bi-people me-1"></i> Users</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bi bi-plus-circle me-1"></i> Create Ticket</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="bi bi-inbox me-1"></i> Inbox</a>
-          </li>
-        </ul>
-        <span class="navbar-text me-4 text-muted">Admin Panel</span>
+            <a class="nav-link" href="/dashboard"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+        </li>
+        {% if user.role == "admin" or user.role == "staff" %}
+        <li class="nav-item">
+            <a class="nav-link" href="/tickets"><i class="bi bi-ticket-detailed me-1"></i> All Tickets</a>
+        </li>
+        {% endif %}
+        {% if user.role == "admin" %}
+        <li class="nav-item">
+            <a class="nav-link" href="/all_users"><i class="bi bi-ticket-detailed me-1"></i> All Users</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+            <a class="nav-link" href="/create_ticket"><i class="bi bi-bar-chart-line me-1"></i> Create Ticket</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/index"><i class="bi bi-clock-history me-1"></i> Inbox</a>
+        </li>
+      </ul>
+      <span class="navbar-text me-4 text-muted">
+          {% if user.role == "admin" %}
+          Admin Panel - {{ user.first_name }} {{ user.last_name }}
+          {% elif user.role == "staff" %}
+          Help Desk - {{ user.department.name }} - {{ user.first_name }} {{ user.last_name }}
+          {% else %}
+          Employee - {{ user.department.name }} - {{ user.first_name }} {{ user.last_name }}
+          {% endif %}
+      </span>
         <button class="btn btn-outline-dark">
           <i class="bi bi-box-arrow-right"></i> Logout
         </button>
