@@ -97,25 +97,25 @@
                 </thead>
                 <tbody>
                   <!-- Loop start -->
-                  {{ for ticket in all_tickets }}
+                  {% for ticket in all_tickets %}
                   <tr>
                     <td>{{ ticket.id }}</td>
                     <td>{{ ticket.title }}</td>
-                    <td>{{ ticket.Date }}</td>
+                    <td>{{ ticket.created_at }}</td>
                     <td>
-                      {% if ticket.Status == 'Resolved' %}
-                      <span class="badge bg-success">{{ ticket.Status }}</span>
-                      {% elif ticket.Status == 'In Progress' %}
-                      <span class="badge bg-warning text-dark">{{ ticket.Status }}</span>
-                      {% elif ticket.Status == 'Open' %}
-                      <span class="badge bg-danger">{{ ticket.Status }}</span>
+                      {% if ticket.status.name == 'Resolved' %}
+                      <span class="badge bg-success">{{ ticket.status.name }}</span>
+                      {% elif ticket.status.name == 'In Progress' %}
+                      <span class="badge bg-warning text-dark">{{ ticket.status.name }}</span>
+                      {% elif ticket.status.name == 'Open' %}
+                      <span class="badge bg-danger">{{ ticket.status.name }}</span>
                       {% else %}
-                      <span class="badge bg-secondary">{{ ticket.Status }}</span>
+                      <span class="badge bg-secondary">{{ ticket.status.name }}</span>
                       {% endif %}
                     </td>
-                    <td>{{ ticket.location }}</td>
-                    <td>{{ ticket.From }}</td>
-                    <td>{{ ticket.Assigned }}</td>
+                    <td>{{ ticket.issuer.location }}</td>
+                    <td>{{ ticket.issuer.first_name }}</td>
+                    <td>{{ ticket.assigned_to.name }}</td>
                   </tr>
                   {{ endfor }}
                 </tbody>
