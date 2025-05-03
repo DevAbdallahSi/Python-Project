@@ -1,0 +1,31 @@
+body {
+    overflow-x: hidden;
+  }
+
+  main {
+    margin-top: 100px;
+  }
+
+  header {
+    margin-left: 0;
+    z-index: 1030;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  /* تغيير الخلفية لحقل البحث */
+  .search-box input {
+    background-color: #f4f6f9 !important; /* تغيير الخلفية الى لون فاتح غير الأبيض */
+    border: 1px solid #ccc; /* حد خفيف حول حقل البحث */
+  }
+
+  /* تغيير الخلفية في الجدول */
+  .table td,
+  .table th {
+    background-color: #f9f9f9; /* تغيير خلفية الخلايا الى لون فاتح */
+  }
+
+  .table-hover tbody tr:hover {
+    background-color: #e0e0e0; /* عند التمرير على الصف */
+  }
