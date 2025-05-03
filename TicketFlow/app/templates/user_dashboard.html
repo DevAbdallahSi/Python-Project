@@ -45,7 +45,7 @@
             <a class="nav-link" href="/create_ticket"><i class="bi bi-bar-chart-line me-1"></i> Create Ticket</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/index"><i class="bi bi-clock-history me-1"></i> Inbox</a>
+            <a class="nav-link" href="/inbox"><i class="bi bi-clock-history me-1"></i>Inbox</a>
         </li>
       </ul>
       <span class="navbar-text me-4 text-muted">
@@ -73,14 +73,14 @@
           <div class="mb-5">
             <h3 class="text-primary mb-3"><i class="bi bi-person-circle me-2"></i>User Profiles</h3>
             <!-- Loop start -->
-            {{ for user in users }}
+            {% for user in users %}
             <div class="bg-white p-3 rounded mb-3 shadow-sm border">
               <h5 class="mb-1">{{ user.name }}</h5>
               <p class="mb-1">Job Title: {{ user.title }}</p>
               <p class="mb-1">Location: {{ user.location }}</p>
               <p class="mb-0">Department: {{ user.department }}</p>
             </div>
-            {{ endfor }}
+            {% endfor %}
           </div>
 
           <!-- My Tickets -->
@@ -101,7 +101,7 @@
                   </thead>
                   <tbody>
                     <!-- Loop start -->
-                    {{ for ticket in tickets }}
+                    {% for ticket in tickets %}
                     <tr>
                       <td>{{ ticket.title }}</td>
                       <td>{{ ticket.Date }}</td>
@@ -117,7 +117,7 @@
                         {% endif %}
                       </td>
                     </tr>
-                    {{ endfor }}
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>

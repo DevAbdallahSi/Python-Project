@@ -24,7 +24,6 @@ def dashboard(request):
         if user.role == 'user':
             context={
                 "user":user,
-                'user_tickets':models
             }
             return render(request,'user_dashboard.html',context)
     else:
@@ -46,10 +45,7 @@ def register_form(request):
     
 def landing(request):
     if 'user_id' in request.session:
-        context={
-            'user':models.User.get_user_by_id(request.session['user_id']),
-        }
-        return render(request, 'dashboard.html',context)
+        return redirect('/dashboard')
     else:
         return render(request,'login_page.html')
 
