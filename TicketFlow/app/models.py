@@ -127,7 +127,7 @@ class Message(models.Model):
         message = Message.objects.create(content=content,comment=comment,user=user,department=department)
         return message
 
-    def show_message():
+    def show_messages():
         return Message.objects.all()
     
     def get_messeges_by_user_id(user_id):
