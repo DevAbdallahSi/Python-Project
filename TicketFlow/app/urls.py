@@ -19,5 +19,6 @@ urlpatterns = [
     path('add_new_ticket',views.add_new_ticket),
     path('ticket/<int:ticket_id>',views.ticket_info),
     path('assign',views.assign),
-    path('close_ticket',views.close_ticket)
+    path('close_ticket',views.close_ticket),
+    path('mark_inprogress',views.mark_inprogress)
 ]

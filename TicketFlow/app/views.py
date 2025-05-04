@@ -22,12 +22,20 @@ def dashboard(request):
                 "ticket_closed":len(closed),
                 "ticket_open":len(open),
                 "tickets":not_assigned,
+                "tickets_total": len(models.Ticket.objects.all())
             }
             return render(request,'admin_dashboard.html',context)
         if user.role == 'staff':
+            total = user.department.dp_tickets.all()
+            closed = user.department.dp_tickets.filter(status=3)
+            open = user.department.dp_tickets.filter(status__in=[2, 4])
             context={
                 "user":user,
-                # 'department':models.Department.create_department(request.POST)
+                "ticket_closed":len(closed),
+                "ticket_open":len(user.department.dp_tickets.filter(status=2)),
+                "tickets_total":len(total),
+                "tickets_progress": len(user.department.dp_tickets.filter(status=4)),
+                "tickets":open
             }
             return render(request,'departmint_dashborde.html',context)
         if user.role == 'user':
@@ -116,7 +124,7 @@ def inbox(request):
         if user.role != 'admin':
             context={
                 'user':user,
-                'user_messeges':models.Message.get_messeges_by_user_id(user_id),
+                'user_messeges': user.messages.all(),
             }
             return render (request,'user_inbox.html',context)
         else:
@@ -147,14 +155,14 @@ def all_tickets(request):
         if user.role == 'admin':
             context={
                 'user':user,
-                'tickets':models.Ticket.show_tickets()
+                'all_tickets':models.Ticket.show_tickets()
             }
             return render (request,'admin_all_tickets.html',context)
         else:
             if user.role =='staff':
                 context={
                     'user':user,
-                    'tickets':models.Ticket.get_tickets_for_user_department(user_id)
+                    'all_tickets':models.Ticket.get_tickets_for_user_department(user_id)
                 }
                 return render (request,'admin_all_tickets.html',context) 
             else:
@@ -226,6 +234,16 @@ def close_ticket(request):
     if 'user_id' in request.session:
         if request.method == "POST":
             models.Ticket.close_ticket(request.POST)
+            return redirect('/dashboard')
+        else:
+            return redirect('/landing')
+    else:
+        return redirect('/landing')
+
+def mark_inprogress(request):
+    if 'user_id' in request.session:
+        if request.method == "POST":
+            models.Ticket.mark_ticket(request.POST)
             return redirect('/dashboard')
         else:
             return redirect('/landing')
