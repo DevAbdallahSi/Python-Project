@@ -1,4 +1,3 @@
-/* inbox.css - تصميم غامق عصري لصفحة الرسائل (Inbox) */
 
 html, body {
   height: 100%;
@@ -7,19 +6,21 @@ html, body {
 }
 
 body {
-  background: linear-gradient(to right, #0f172a, #1e293b);
-  color: #f1f5f9;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 90px;
+    background: linear-gradient(to right, #8c919c, #efeff2);
+    color: #f1f5f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 90px;
+}
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #606771 !important;
 }
 
-
-/* === Navbar بتصميم غامق وأنيق === */
 .navbar {
-  background-color: #0f172a !important;
+  background-color: #404756 !important;
   border-bottom: 1px solid #334155;
 }
 
@@ -46,7 +47,6 @@ body {
   color: #0f172a !important;
 }
 
-/* === الشعار === */
 .logo {
   width: 40px;
   height: 40px;
@@ -55,28 +55,22 @@ body {
   margin-right: 10px;
 }
 
-/* === العناوين === */
 h3.text-primary {
-  color: #38bdf8 !important;
+  color: #ffffff !important;
 }
 
 .card-header h5 {
   color: #f1f5f9;
 }
 
-/* === بطاقات المعلومات والملفات === */
-.bg-white,
-.card,
-.shadow-sm,
-.border {
-  background-color: #1e293b !important;
-  color: #e2e8f0 !important;
-  border: 1px solid #334155 !important;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.3) !important;
+.bg-white, .card, .shadow-sm, .border {
+    background-color: #404756 !important;
+    color: #e2e8f0 !important;
+    border: 1px solid #334155 !important;
+    border-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.3) !important;
 }
 
-/* === الجداول === */
 .table thead {
   background-color: #334155;
   color: #f1f5f9;
@@ -87,9 +81,8 @@ h3.text-primary {
   color: #f1f5f9;
 }َ
 
-/* === شارات الحالات (التذاكر) === */
 .badge.bg-success {
-  background-color: #22c55e !important; /* أخضر نيون */
+  background-color: #22c55e !important; 
 }
 
 .badge.bg-warning {
@@ -108,10 +101,18 @@ h3.text-primary {
 /* Footer */
 footer {
   background-color: #0f172a !important;
-  color: #94a3b8;
+  color: #e9ebef;
   border-top: 1px solid #334155;
   text-align: center;
   padding: 20px 0;
-  font-size: 14px;
+  font-size: 20px;
   margin-top: auto;
+}
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #606771 !important;
+}
+.text-muted {
+    --bs-text-opacity: 1;
+    color: white !important;
 }
