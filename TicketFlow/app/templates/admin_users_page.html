@@ -144,18 +144,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for user in users %}
                                     <tr>
-                                        <td>Administrator</td>
-                                        <td>Boss</td>
-                                        <td>Boss.Admin@gmail.com</td>
-                                        <td>Ramallah</td>
+                                        <td>{{user.first_name}} {{user.last_name}}</td>
+                                        <td>{{user.role}}</td>
+                                        <td>{{user.email}}</td>
+                                        <td>{{user.location}}</td>
                                         <td>
                                             <button class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#editUserModal">Edit</button>
+                                                {%if user.role != 'admin'%}
                                             <button class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteUserModal">Delete</button>
+                                                {% endif %}
                                         </td>
                                     </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

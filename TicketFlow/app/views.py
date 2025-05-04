@@ -198,3 +198,36 @@ def assign_user_to_department(request):
             return redirect('/landing')
     else:
             return redirect('/landing')
+    
+def ticket_info(request,ticket_id):
+    if 'user_id' in request.session:
+        user = models.User.get_user_by_id(request.session['user_id'])
+        ticket =models.Ticket.get_ticket_by_id(ticket_id)
+        context={
+            "user":user,
+            "ticket":ticket,
+            "departments": models.Department.git_all_departmen(),
+        }
+        return render(request,"ticket_info.html",context)
+    else:
+        return redirect('/landing')
+
+def assign(request):
+    if 'user_id' in request.session:
+        if request.method == "POST":
+            models.Ticket.assign_ticket(request.POST)
+            return redirect('/dashboard')
+        else:
+            return redirect('/landing')
+    else:
+        return redirect('/landing')
+    
+def close_ticket(request):
+    if 'user_id' in request.session:
+        if request.method == "POST":
+            models.Ticket.close_ticket(request.POST)
+            return redirect('/dashboard')
+        else:
+            return redirect('/landing')
+    else:
+        return redirect('/landing')

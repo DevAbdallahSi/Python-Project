@@ -120,19 +120,15 @@ class Message(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def create_messages(post):
-        user = User.objects.get(id=post['user_id'])
+        user = User.objects.get(id=post['issuer_id'])
         department = Department.objects.get(id=post['department_id'])
-        content=post['content']
+        content=post['message_content']
         comment=post['comment']
         message = Message.objects.create(content=content,comment=comment,user=user,department=department)
         return message
 
     def show_messages():
         return Message.objects.all()
-    
-    def get_messeges_by_user_id(user_id):
-        user=User.get_user_by_id(user_id)
-        return user.messages.all()
     
 class Status(models.Model):
     name = models.CharField(max_length=40)
@@ -173,6 +169,13 @@ class Ticket(models.Model):
             return Ticket.objects.filter(status=status)
         else:
             return Ticket.objects.all()
+    
+    def assign_ticket(post):
+        ticket = Ticket.objects.get(id=post['ticket_id'])
+        ticket.priority = post['priority']
+        ticket.assigned_to = Department.objects.get(id=post['department_name'])
+        ticket.status = Status.objects.get(id=2)
+        ticket.save()
 
     def get_ticket_by_id(ticket_id):
         return Ticket.objects.get(id=ticket_id)
@@ -183,4 +186,9 @@ class Ticket(models.Model):
     def get_tickets_for_user_department(user_id):
         user = User.objects.get(id=user_id)
         return Ticket.objects.filter(assigned_to=user.department)
+    def close_ticket(post):
+        Message.create_messages(post)
+        ticket = Ticket.objects.get(id=post['ticket_id'])
+        ticket.status = Status.objects.get(id=3)
+        ticket.save()
 

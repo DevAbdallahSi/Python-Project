@@ -73,50 +73,54 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">ID</label>
-                        <input type="text" class="form-control" value="{{1}}" disabled>
+                        <input type="text" class="form-control" value="{{ticket.id}}" disabled>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Title</label>
-                        <input type="text" class="form-control" value="{{1}}" disabled>
+                        <input type="text" class="form-control" value="{{ticket.title}}" disabled>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label class="form-label">Status</label>
-                        <input type="text" class="form-control" value="{{1}}" disabled>
+                        <input type="text" class="form-control" value="{{ticket.status.name}}" disabled>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Priority</label>
-                        <input type="text" class="form-control" value="{{1}}" disabled>
+                        <input type="text" class="form-control" value="{{ticket.priority}}" disabled>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Assign Date</label>
-                        <input type="text" class="form-control" value="{{1}}" disabled>
+                        <label class="form-label">Issue Date</label>
+                        <input type="text" class="form-control" value="{{ticket.created_at}}" disabled>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label class="form-label">Issuer</label>
-                        <input type="text" class="form-control" value="{{1}}" disabled>
+                        <input type="text" class="form-control" value="{{ticket.issuer.id}}" disabled>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Assigned To</label>
-                        <input type="text" class="form-control" value="{{1}}" disabled>
+                        <input type="text" class="form-control" value="{{ticket.assigned_to.name}}" disabled>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Location</label>
-                        <input type="text" class="form-control" value="{{1}}" disabled>
+                        <input type="text" class="form-control" value="{{ticket.location}}" disabled>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Description</label>
-                    <textarea class="form-control" rows="4" disabled>{{1}}</textarea>
+                    <textarea class="form-control" rows="4" disabled>{{ticket.description}}</textarea>
                 </div>
             </form>
-            <button data-bs-toggle="modal" data-bs-target="#close-ticket-modal">Close Ticket</button>
+            {% if ticket.status.name == "Not assigned"%}
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assign-ticket-modal">Assign Ticket</button>
+            {% else %}
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#close-ticket-modal">Close Ticket</button>
+            {% endif %}
         </div>
     </div>
 </div>
@@ -132,14 +136,54 @@
             </div>
 
             <div class="modal-body">
-                <form id="create_department">
+                <form action="/close_ticket" method="post">
                     {% csrf_token %}
-                    <input type="text" name="user_and_ticket_id" value="{{id:2}}" disabled><br>
-                    <label for="department_name">Comment</label>
-                    <input type="text" name="department_name" required><br>
+                    <input type="hidden" name="department_id" value="{{ticket.assigned_to.id}}">
+                    <input type="hidden" name="issuer_id" value="{{ticket.issuer.id}}">
+                    <input type="hidden" name="ticket_id" value="{{ticket.id}}">
+                    <input type="text" name="message_content" value="User id:{{ticket.issuer.id}} , ticket ID:{{ticket.id}}"><br>
+                    <label for="comment">Comment</label>
+                    <input type="text" name="comment"><br>
                     </label>
                     <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-primary">Close & Send</button>
+                        <button type="submit" class="btn btn-primary">Close & Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="assign-ticket-modal">
+
+    <div class="modal-dialog modal-dialog-centered modal-md">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="assign-ticket-modal-Label">Assign Ticket</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form action="/assign" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="ticket_id" value="{{ticket.id}}">
+                    <label for="priority"></label>
+                    <select name="priority" required>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="critical">Critical</option>
+                    </select>
+                    <label for="department_name">Department</label>
+                    <select name="department_name" required>
+                        {% for department in departments%}
+                        <option value="{{department.id}}">{{department.name}}</option>
+                        {% endfor %}
+                    </select><br>
+                    </label>
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
