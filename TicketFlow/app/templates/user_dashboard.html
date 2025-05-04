@@ -100,19 +100,19 @@
                   </thead>
                   <tbody>
                     <!-- Loop start -->
-                    {% for ticket in tickets %}
+                    {% for ticket in user_tickets %}
                     <tr>
                       <td>{{ ticket.title }}</td>
-                      <td>{{ ticket.Date }}</td>
+                      <td>{{ ticket.created_at }}</td>
                       <td>
-                        {% if ticket.Status == 'Resolved' %}
-                        <span class="badge bg-success">{{ ticket.Status }}</span>
-                        {% elif ticket.Status == 'In Progress' %}
-                        <span class="badge bg-warning text-dark">{{ ticket.Status }}</span>
-                        {% elif ticket.Status == 'Open' %}
-                        <span class="badge bg-danger">{{ ticket.Status }}</span>
-                        {% else %}
-                        <span class="badge bg-secondary">{{ ticket.Status }}</span>
+                        {% if ticket.status.name == 'Closed' %}
+                        <span class="badge bg-success">{{ ticket.status.name }}</span>
+                        {% elif ticket.status.name == 'In Progress' %}
+                        <span class="badge bg-warning text-dark">{{ ticket.status.name }}</span>
+                        {% elif ticket.status.name == 'Open' %}
+                        <span class="badge bg-danger">{{ ticket.status.name }}</span>
+                        {% elif ticket.status.name == 'Not assigned' %}
+                        <span class="badge bg-danger">{{ ticket.status.name }}</span>
                         {% endif %}
                       </td>
                     </tr>

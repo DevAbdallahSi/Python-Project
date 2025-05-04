@@ -12,6 +12,6 @@ urlpatterns = [
     path('logout',views.logout),
     path('all_users',views.all_users),
     path('login',views.login_form),
-    path('register',views.register_form)
-
+    path('register',views.register_form),
+    path('add_new_ticket',views.add_new_ticket),
 ]
