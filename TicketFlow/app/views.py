@@ -113,11 +113,18 @@ def inbox(request):
     if 'user_id' in request.session:
         user_id=request.session['user_id']
         user=models.User.get_user_by_id(user_id)
-        context={
-            'user':user,
-            'user_messeges':models.Message.get_messeges_by_user_id(user_id)
-        }
-        return render (request,'user_inbox.html',context)
+        if user.role != 'admin':
+            context={
+                'user':user,
+                'user_messeges':models.Message.get_messeges_by_user_id(user_id),
+            }
+            return render (request,'user_inbox.html',context)
+        else:
+            context={
+                'user':user,
+                'user_messeges':models.Message.show_messages(),
+            }
+            return render (request,'user_inbox.html',context)
     else:
         return redirect('/landing')
 
@@ -137,11 +144,21 @@ def all_tickets(request):
     if 'user_id' in request.session:
         user_id=request.session['user_id']
         user=models.User.get_user_by_id(user_id)
-        context={
-            'user':user,
-            'all_tickets':models.Ticket.show_tickets()
-        }
-        return render (request,'admin_all_tickets.html',context)
+        if user.role == 'admin':
+            context={
+                'user':user,
+                'tickets':models.Ticket.show_tickets()
+            }
+            return render (request,'admin_all_tickets.html',context)
+        else:
+            if user.role =='staff':
+                context={
+                    'user':user,
+                    'tickets':models.Ticket.get_tickets_for_user_department(user_id)
+                }
+                return render (request,'admin_all_tickets.html',context) 
+            else:
+                return redirect('/landing')
     else:
         return redirect('/landing')
     

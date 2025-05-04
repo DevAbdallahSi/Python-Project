@@ -169,9 +169,14 @@
         </div>
     </div>
     <!-- Footer -->
-    <footer class="mt-5 text-center text-muted py-3 bg-light">
-        &copy; 2025 TicketFlow. All rights reserved.
+    <footer class="text-center py-3 bg-light mt-auto">
+        <div class="container">
+            <span class="text-muted">&copy; <span id="currentYear"></span> TicketFlow. All rights reserved.</span>
+        </div>
     </footer>
+    <script>
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+    </script>
 
     <!-- Bootstrap JS and Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

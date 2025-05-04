@@ -127,7 +127,7 @@ class Message(models.Model):
         message = Message.objects.create(content=content,comment=comment,user=user,department=department)
         return message
 
-    def show_message():
+    def show_messages():
         return Message.objects.all()
     
 class Status(models.Model):
