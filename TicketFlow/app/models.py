@@ -31,8 +31,8 @@ class TicketManager(models.Manager):
         errors = {}
         if len(postData['title']) < 2:
             errors['title'] = "Title must be at least 2 characters"
-        if len(postData['description']) < 15:
-            errors['description'] = "Description must be at least 15 characters"
+        if len(postData['description']) < 5:
+            errors['description'] = "Description must be at least 5 characters"
         return errors
     
 class DepartmentManager(models.Manager):
@@ -145,15 +145,16 @@ class Status(models.Model):
         return status
 
     def show_status():
-        return Status.objects.all() 
+        return Status.objects.all()
+    
     
 class Ticket(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    priority = models.CharField(max_length=20 , null=True, blank=True)
+    priority = models.CharField(max_length=20 ,null=True, blank=True)
     status = models.ForeignKey(Status,related_name="status_tickets",on_delete=models.CASCADE)
     issuer = models.ForeignKey(User,related_name="user_tickets",on_delete=models.CASCADE)
-    assigned_to = models.ForeignKey(Department,related_name="dp_tickets",on_delete=models.CASCADE)
+    assigned_to = models.ForeignKey(Department,related_name="dp_tickets",on_delete=models.CASCADE ,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects=TicketManager()
@@ -162,12 +163,9 @@ class Ticket(models.Model):
     def create_ticket(post):
         title = post['title']
         description = post['description']
-        priority = post['']
-        status = Status.objects.get(id=post['status_id'])
-        issuer = User.objects.get(id=post['issuer_id'])
-        assigned_to = Department.objects.get(id=post['assigned_to_id'])
-
-        ticket = Ticket.objects.create(title=title, description=description, priority=priority, status=status, issuer=issuer, assigned_to=assigned_to)
+        status = Status.objects.get(id=1)
+        issuer = User.objects.get(id=post['user_id'])
+        ticket = Ticket.objects.create(title=title, description=description, status=status, issuer=issuer)
         return ticket
 
     def show_tickets(status=None):
@@ -178,3 +176,11 @@ class Ticket(models.Model):
 
     def get_ticket_by_id(ticket_id):
         return Ticket.objects.get(id=ticket_id)
+    
+    def get_tickets_by_user_id(user_id):
+        return Ticket.objects.filter(issuer_id=user_id)
+    
+    def get_tickets_for_user_department(user_id):
+        user = User.objects.get(id=user_id)
+        return Ticket.objects.filter(assigned_to=user.department)
+

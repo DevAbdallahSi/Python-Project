@@ -16,6 +16,5 @@ urlpatterns = [
     path('create_department',views.create_department),
     path('change_user_role',views.change_user_role),
     path('assign_user_to_department',views.assign_user_to_department),
-
-
+    path('add_new_ticket',views.add_new_ticket),
 ]

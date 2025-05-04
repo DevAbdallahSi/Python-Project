@@ -1,0 +1,38 @@
+[
+    {
+        "model": "app.status",
+        "pk": 1 ,
+        "fields": {
+            "name":"Not assigned",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.status",
+        "pk": 2 ,
+        "fields": {
+            "name":"Open",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.status",
+        "pk": 3 ,
+        "fields": {
+            "name":"Closed",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.status",
+        "pk": 4 ,
+        "fields": {
+            "name":"In progress",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    }
+]

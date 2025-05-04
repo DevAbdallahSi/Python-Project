@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from . import models
+from django.http import JsonResponse
 import bcrypt
 
 def index(request):
@@ -32,6 +33,7 @@ def dashboard(request):
         if user.role == 'user':
             context={
                 "user":user,
+                'user_tickets':models.Ticket.get_tickets_by_user_id(user_id)
             }
             return render(request,'user_dashboard.html',context)
     else:
@@ -104,6 +106,8 @@ def create_ticket(request):
         return render (request,'user_create_ticket.html',context)
     else:
         return redirect('/landing')
+    
+
 
 def inbox(request):
     if 'user_id' in request.session:
@@ -140,6 +144,23 @@ def all_tickets(request):
         return render (request,'admin_all_tickets.html',context)
     else:
         return redirect('/landing')
+    
+def add_new_ticket(request):
+    if 'user_id' in request.session:
+        if request.method == 'POST':
+            errors = models.Ticket.objects.validate_ticket(request.POST)
+            if errors:
+                for k, v in errors.items():
+                    messages.error(request, v)
+                return redirect('/landing')
+            else:
+                ticket=models.Ticket.create_ticket(request.POST)
+                return redirect ('/dashboard')
+        else:
+            return redirect('/landing')
+    else:
+            return redirect('/landing')
+
 
 def change_user_role(request):
     if 'user_id' in request.session:
