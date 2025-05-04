@@ -26,17 +26,27 @@ def dashboard(request):
             }
             return render(request,'admin_dashboard.html',context)
         if user.role == 'staff':
-            total = user.department.dp_tickets.all()
-            closed = user.department.dp_tickets.filter(status=3)
-            open = user.department.dp_tickets.filter(status__in=[2, 4])
-            context={
-                "user":user,
-                "ticket_closed":len(closed),
-                "ticket_open":len(user.department.dp_tickets.filter(status=2)),
-                "tickets_total":len(total),
-                "tickets_progress": len(user.department.dp_tickets.filter(status=4)),
-                "tickets":open
-            }
+            if user.department:
+                total = user.department.dp_tickets.all()
+                closed = user.department.dp_tickets.filter(status=3)
+                open = user.department.dp_tickets.filter(status__in=[2, 4])
+                context={
+                    "user":user,
+                    "ticket_closed":len(closed),
+                    "ticket_open":len(user.department.dp_tickets.filter(status=2)),
+                    "tickets_total":len(total),
+                    "tickets_progress": len(user.department.dp_tickets.filter(status=4)),
+                    "tickets":open
+                }
+            else:
+                context={
+                    "user":user,
+                    "ticket_closed":0,
+                    "ticket_open":0,
+                    "tickets_total":0,
+                    "tickets_progress": 0,
+                    "tickets":[]
+                }
             return render(request,'departmint_dashborde.html',context)
         if user.role == 'user':
             context={
