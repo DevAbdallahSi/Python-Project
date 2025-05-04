@@ -186,9 +186,15 @@ class Ticket(models.Model):
     def get_tickets_for_user_department(user_id):
         user = User.objects.get(id=user_id)
         return Ticket.objects.filter(assigned_to=user.department)
+    
     def close_ticket(post):
         Message.create_messages(post)
         ticket = Ticket.objects.get(id=post['ticket_id'])
         ticket.status = Status.objects.get(id=3)
+        ticket.save()
+    
+    def mark_ticket(post):
+        ticket = Ticket.objects.get(id=post['ticket_id'])
+        ticket.status = Status.objects.get(id=4)
         ticket.save()
 

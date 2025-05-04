@@ -12,6 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     {% load static %}
+    {% load ticket_filters %}
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/department_dash.css' %}">
 
     
@@ -74,24 +76,24 @@
             <div class="col-md-4">
                 <div class="card text-white bg-primary shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Assigned</h5>
-                        <p class="card-text fs-4">10</p>
+                        <h5 class="card-title">In Progress</h5>
+                        <p class="card-text fs-4">{{tickets_progress}}<span style="font-size: 16px;">/{{tickets_total}}</span></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card text-white bg-warning shadow">
                     <div class="card-body">
-                        <h5 class="card-title">In Progress</h5>
-                        <p class="card-text fs-4">7</p>
+                        <h5 class="card-title">Open</h5>
+                        <p class="card-text fs-4">{{ticket_open}}<span style="font-size: 16px;">/{{tickets_total}}</span></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card text-white bg-success shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Resolved</h5>
-                        <p class="card-text fs-4">25</p>
+                        <h5 class="card-title">Closed</h5>
+                        <p class="card-text fs-4">{{ticket_closed}}<span style="font-size: 16px;">/{{tickets_total}}</span></p>
                     </div>
                 </div>
             </div>
@@ -124,16 +126,32 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for ticket in tickets%}
                         <tr>
-                            <td>#101</td>
-                            <td>Printer not working</td>
-                            <td><span class="badge bg-warning text-dark">In Progress</span></td>
-                            <td>High</td>
+                            <td>#{{ticket.id}}</td>
+                            <td>{{ticket.title}}</td>
                             <td>
-                                <button class="btn btn-sm btn-info" title="View"><i class="bi bi-eye"></i></button>
-                                <button class="btn btn-sm btn-success" title="Resolve"><i class="bi bi-check2-circle"></i></button>
+                                {% if ticket.status.name == 'Closed' %}
+                                <span class="badge bg-success">{{ ticket.status.name }}</span>
+                                {% elif ticket.status.name == 'In progress' %}
+                                <span class="badge bg-warning text-dark">{{ ticket.status.name }}</span>
+                                {% elif ticket.status.name == 'Open' %}
+                                <span class="badge bg-danger">{{ ticket.status.name }}</span>
+                                {% else %}
+                                <span class="badge bg-secondary">{{ ticket.status.name }}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ticket.priority}}</td>
+                            <td>
+                                <a href="/ticket/{{ ticket.id }}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
+                                <form action="/mark_inprogress" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="ticket_id" value="{{ticket.id}}">
+                                    <button type="submit" class="btn btn-sm btn-warning" title="Mark In-progress"><i class="bi bi-check2-circle"></i></button>
+                                </form>
                             </td>
                         </tr>
+                        {% endfor %}
                         <!-- Additional ticket rows go here -->
                     </tbody>
                 </table>
@@ -160,10 +178,10 @@
         const ticketChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Assigned', 'In Progress', 'Resolved'],
+                labels: ['Open', 'In Progress', 'Closed'],
                 datasets: [{
                     label: 'Tickets',
-                    data: [10, 7, 25],
+                    data: [{{ user.department|filter_by_status:"2"|length }}, {{ user.department|filter_by_status:"4"|length }}, {{ user.department|filter_by_status:"3"|length }}],
                     backgroundColor: ['#0d6efd', '#ffc107', '#198754'],
                     borderRadius: 5
                 }]
