@@ -38,11 +38,12 @@ class TicketManager(models.Manager):
 class DepartmentManager(models.Manager):
     def basic_validator(self, post):
         errors = {}
-        if len(post['name']) <= 2:
-            errors["name"] = " name should be at least 2 characters"
+        if len(post['department_name']) < 2:
+            errors["department_name"] = " name should be at least 2 characters"
         if len(post['description']) < 5:
-            errors["description"] = " description should be at least 2 characters"
+            errors["description"] = " description should be at least 5 characters"
         return errors
+    
 class Department(models.Model):
     name=models.CharField(max_length=50)
     desc=models.TextField()
@@ -95,6 +96,17 @@ class User(models.Model):
             return user
         else:
             return None
+    
+    def update_user_role(post):
+        user = User.objects.get(id=post["user_id"])
+        user.role = post["role"]
+        user.save()
+
+    def update_user_department(post):
+        user = User.objects.get(id=post["user_id"])
+        department = Department.objects.get(id=post["department_id"])
+        user.department = department
+        user.save()
         
     def get_all_users():
         return User.objects.all()
@@ -138,7 +150,7 @@ class Status(models.Model):
 class Ticket(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    priority = models.CharField(max_length=20)
+    priority = models.CharField(max_length=20 , null=True, blank=True)
     status = models.ForeignKey(Status,related_name="status_tickets",on_delete=models.CASCADE)
     issuer = models.ForeignKey(User,related_name="user_tickets",on_delete=models.CASCADE)
     assigned_to = models.ForeignKey(Department,related_name="dp_tickets",on_delete=models.CASCADE)
@@ -158,8 +170,11 @@ class Ticket(models.Model):
         ticket = Ticket.objects.create(title=title, description=description, priority=priority, status=status, issuer=issuer, assigned_to=assigned_to)
         return ticket
 
-    def show_ticket():
-        return Ticket.objects.all()
+    def show_tickets(status=None):
+        if status:
+            return Ticket.objects.filter(status=status)
+        else:
+            return Ticket.objects.all()
 
     def get_ticket_by_id(ticket_id):
         return Ticket.objects.get(id=ticket_id)

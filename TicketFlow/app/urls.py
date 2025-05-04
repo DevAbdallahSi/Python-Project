@@ -12,6 +12,10 @@ urlpatterns = [
     path('logout',views.logout),
     path('all_users',views.all_users),
     path('login',views.login_form),
-    path('register',views.register_form)
+    path('register',views.register_form),
+    path('create_department',views.create_department),
+    path('change_user_role',views.change_user_role),
+    path('assign_user_to_department',views.assign_user_to_department),
+
 
 ]
