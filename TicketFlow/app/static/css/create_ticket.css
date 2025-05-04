@@ -1,6 +1,4 @@
-/* create_ticket.css - تصميم غامق عصري لصفحة إنشاء التذكرة */
 
-/* تعيين الجسم ليكون Flexbox */
 html, body {
   height: 100%;
   margin: 0;
@@ -8,20 +6,20 @@ html, body {
 }
 
 body {
-  background: linear-gradient(to right, #0f172a, #1e293b);
-  color: #f1f5f9;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 90px;
+    background: linear-gradient(to right, #8c919c, #efeff2);
+    color: #f1f5f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 90px;
 }
 
 /* === Navbar بتصميم غامق وأنيق === */
 .navbar {
-  background-color: #0f172a !important;
-  border-bottom: 1px solid #334155;
-}
+    background-color: #404756 !important;
+    border-bottom: 1px solid #334155;
+  }
 
 .navbar .navbar-brand,
 .navbar .nav-link,
@@ -56,13 +54,13 @@ body {
 
 /* === Card تصميم بطاقات التذاكر === */
 .card {
-  background-color: #1e293b !important;
-  color: #f1f5f9 !important;
-  border: 1px solid #334155;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.3);
-  transition: all 0.3s ease-in-out;
-  margin: 50px 0;
+    background-color: #404756 !important;
+    color: #f1f5f9 !important;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.3);
+    transition: all 0.3s ease-in-out;
+    margin: 50px 0;
 }
 
 .card-header {
@@ -72,12 +70,12 @@ body {
 
 .card-header h4 {
   color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* ظل ناعم أبيض */
+  text-shadow: 0 2px 4px rgba(103, 99, 99, 0.4); 
 }
 
 /* === Form Elements تصميم الحقول === */
 .form-control {
-  background-color: #0f172a;
+  background-color: #1e293b;
   color: #e2e8f0;
   border: 1px solid #334155;
   border-radius: 6px;
@@ -125,4 +123,12 @@ footer {
   padding: 20px 0;
   font-size: 14px;
   margin-top: auto;
+}
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #606771 !important;
+}
+.text-primary {
+    --bs-text-opacity: 1;
+    color: whitesmoke !important;
 }

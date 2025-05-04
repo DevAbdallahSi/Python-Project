@@ -124,7 +124,7 @@ def inbox(request):
         if user.role != 'admin':
             context={
                 'user':user,
-                'user_messeges': user.messages.all(),
+                'user_messeges':user.messages.all(),
             }
             return render (request,'user_inbox.html',context)
         else:
