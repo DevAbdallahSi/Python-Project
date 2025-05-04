@@ -9,6 +9,7 @@ body {
     padding-top: 40px;
     padding-bottom: 40px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
 }
 
 h1.display-4 {
@@ -84,4 +85,15 @@ hr {
         opacity: 1;
         transform: translateY(0);
     }
+}
+footer {
+    background-color: #0f172a !important;
+    color: #94a3b8;
+    border-top: 1px solid #334155;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    margin-top: auto;
+    position: absolute;
+    bottom: 0;
 }

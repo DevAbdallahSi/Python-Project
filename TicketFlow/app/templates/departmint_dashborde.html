@@ -12,13 +12,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/department_dash.css' %}">
 
-    <style>
-        body {
-            padding-top: 70px;
-            /* Height of fixed navbar */
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -26,7 +22,7 @@
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top shadow px-4">
         <div class="container-fluid">
-            <img src="{% static '/img/logo.jpg' %}" alt="logo" class="logo">
+            <img src="{% static '/img/logo.jpg' %}" alt="logo" class="logo" height="40">
             <a class="navbar-brand fw-bold" href="">TicketFlow</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
                 aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,15 +41,14 @@
                     {% endif %}
                     {% if user.role == "admin" %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/all_users"><i class="bi bi-ticket-detailed me-1"></i> All Users</a>
+                        <a class="nav-link" href="/all_users"><i class="bi bi-people me-1"></i> All Users</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/create_ticket"><i class="bi bi-bar-chart-line me-1"></i> Create
-                            Ticket</a>
+                        <a class="nav-link" href="/create_ticket"><i class="bi bi-plus-circle me-1"></i> Create Ticket</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/inbox"><i class="bi bi-clock-history me-1"></i> Inbox</a>
+                        <a class="nav-link" href="/inbox"><i class="bi bi-inbox me-1"></i> Inbox</a>
                     </li>
                 </ul>
                 <span class="navbar-text me-4 text-muted">
@@ -66,7 +61,8 @@
                     {% endif %}
                 </span>
                 <a class="btn btn-outline-dark" href="/logout">
-                    <i class="bi bi-box-arrow-right"></i>Logout</a>
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
             </div>
         </div>
     </nav>
@@ -76,7 +72,7 @@
         <!-- Ticket Summary Cards -->
         <div class="row g-3 mb-4">
             <div class="col-md-4">
-                <div class="card text-white bg-primary">
+                <div class="card text-white bg-primary shadow">
                     <div class="card-body">
                         <h5 class="card-title">Assigned</h5>
                         <p class="card-text fs-4">10</p>
@@ -84,7 +80,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-white bg-warning">
+                <div class="card text-white bg-warning shadow">
                     <div class="card-body">
                         <h5 class="card-title">In Progress</h5>
                         <p class="card-text fs-4">7</p>
@@ -92,7 +88,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-white bg-success">
+                <div class="card text-white bg-success shadow">
                     <div class="card-body">
                         <h5 class="card-title">Resolved</h5>
                         <p class="card-text fs-4">25</p>
@@ -102,9 +98,9 @@
         </div>
 
         <!-- Chart -->
-        <div class="card mt-4 mb-4">
+        <div class="card mt-4 mb-4 shadow">
             <div class="card-header">
-                <h5>Ticket Status Overview</h5>
+                <h5 class="mb-0">Ticket Status Overview</h5>
             </div>
             <div class="card-body">
                 <canvas id="ticketChart" height="100"></canvas>
@@ -112,7 +108,7 @@
         </div>
 
         <!-- Tickets Table -->
-        <div class="card">
+        <div class="card shadow">
             <div class="card-header">
                 <h5 class="mb-0">Department Tickets</h5>
             </div>
@@ -121,6 +117,7 @@
                     <thead class="table-light">
                         <tr>
                             <th>ID</th>
+                            <th>Title</th>
                             <th>Status</th>
                             <th>Priority</th>
                             <th>Actions</th>
@@ -133,20 +130,27 @@
                             <td><span class="badge bg-warning text-dark">In Progress</span></td>
                             <td>High</td>
                             <td>
-                                <button class="btn btn-sm btn-info"><i class="bi bi-eye"></i></button>
-                                <button class="btn btn-sm btn-success"><i class="bi bi-check2-circle"></i></button>
+                                <button class="btn btn-sm btn-info" title="View"><i class="bi bi-eye"></i></button>
+                                <button class="btn btn-sm btn-success" title="Resolve"><i class="bi bi-check2-circle"></i></button>
                             </td>
                         </tr>
-                        <!-- More rows as needed -->
+                        <!-- Additional ticket rows go here -->
                     </tbody>
                 </table>
             </div>
         </div>
     </main>
+
     <!-- Footer -->
-    <footer class="mt-5 text-center text-muted py-3 bg-light">
-        &copy; 2025 TicketFlow. All rights reserved.
+    <footer class="text-center py-3 bg-light mt-auto">
+        <div class="container">
+            <span class="text-muted">&copy; <span id="currentYear"></span> TicketFlow. All rights reserved.</span>
+        </div>
     </footer>
+
+    <script>
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+    </script>
 
     <!-- Bootstrap JS and Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
