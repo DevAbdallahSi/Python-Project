@@ -29,3 +29,11 @@ body {
   .table-hover tbody tr:hover {
     background-color: #e0e0e0; /* عند التمرير على الصف */
   }
+  
+  .logo{
+
+    height: 60px;
+    width: 60px;
+    size: 80px;
+    border-radius: 100%;
+  }

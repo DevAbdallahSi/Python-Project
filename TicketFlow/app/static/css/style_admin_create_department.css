@@ -22,4 +22,11 @@
         #navbar {
             margin-top: 80px;
         }
-    
+        
+        .logo{
+
+            height: 60px;
+            width: 60px;
+            size: 80px;
+            border-radius: 100%;
+          }
