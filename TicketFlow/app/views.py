@@ -12,8 +12,16 @@ def dashboard(request):
         user_id=request.session['user_id']
         user=models.User.get_user_by_id(user_id)
         if user.role == 'admin':
+            not_assigned = models.Ticket.show_tickets(1)
+            closed = models.Ticket.show_tickets(3)
+            open = models.Ticket.show_tickets(2)
             context={
-                "user":user
+                "user":user,
+                "users":models.User.get_all_users(),
+                "departments":models.Department.git_all_departmen(),
+                "ticket_closed":len(closed),
+                "ticket_open":len(open),
+                "tickets":not_assigned,
             }
             return render(request,'admin_dashboard.html',context)
         if user.role == 'staff':
@@ -154,3 +162,22 @@ def add_new_ticket(request):
             return redirect('/landing')
 
 
+def change_user_role(request):
+    if 'user_id' in request.session:
+        if request.method == 'POST':
+            models.User.update_user_role(request.POST)
+            return redirect('/dashboard')
+        else:
+            return redirect('/landing')
+    else:
+            return redirect('/landing')
+    
+def assign_user_to_department(request):
+    if 'user_id' in request.session:
+        if request.method == 'POST':
+            models.User.update_user_department(request.POST)
+            return redirect('/dashboard')
+        else:
+            return redirect('/landing')
+    else:
+            return redirect('/landing')
