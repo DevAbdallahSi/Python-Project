@@ -1,24 +1,163 @@
-#main-content {
-    margin-left: 0;
-    transition: margin-left 0.3s ease;
-    position: relative;
-    z-index: 0;
-}
+/* admin_users_page.css - تصميم غامق أنيق لصفحة إدارة المستخدمين */
 
-main {
-    margin-top: 80px;
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
 body {
-    overflow-x: hidden;
+    background: linear-gradient(to right, #0f172a, #1e293b);
+    color: #f1f5f9;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-header {
-    margin-left: 0;
-    z-index: 1030;
-    position: relative;
+/* Navbar */
+.navbar {
+    background-color: #0f172a !important;
+    border-bottom: 1px solid #334155;
 }
 
-#navbar {
-    margin-top: 80px;
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .navbar-text,
+.navbar .btn-outline-dark {
+    color: #e2e8f0 !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
+    color: #38bdf8 !important;
+}
+
+.btn-outline-dark {
+    border-color: #64748b;
+    color: #e2e8f0;
+}
+
+.btn-outline-dark:hover {
+    background-color: #38bdf8;
+    border-color: #38bdf8;
+    color: #0f172a !important;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+/* Card */
+.card {
+    background-color: #1e293b !important;
+    color: #f1f5f9 !important;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.3);
+    margin-top: 100px;
+}
+
+/* Card Header */
+.card-header {
+    background-color: transparent !important;
+    border-bottom: 1px solid #334155;
+}
+
+.card-header h5 {
+    color: #38bdf8;
+}
+
+/* Table */
+.table {
+    color: #f1f5f9;
+    background-color: #0f172a;
+    border-color: #334155;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+    border: 1px solid #334155 !important;
+}
+
+.table thead {
+    background-color: #1e293b;
+    color: #38bdf8;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #38bdf8;
+    border-color: #38bdf8;
+    color: #0f172a;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0ea5e9;
+    border-color: #0ea5e9;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    border-color: #ef4444;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+    border-color: #dc2626;
+}
+
+/* Modal */
+.modal-content {
+    background-color: #1e293b;
+    color: #f1f5f9;
+    border: 1px solid #334155;
+    border-radius: 8px;
+}
+
+.modal-header {
+    border-bottom: 1px solid #334155;
+}
+
+.modal-title {
+    color: #38bdf8;
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+.modal-footer {
+    border-top: 1px solid #334155;
+}
+
+/* Form inside Modal */
+.modal-body .form-control {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+}
+
+.modal-body .form-control:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.25);
+    background-color: #1e293b;
+    color: #f8fafc;
+}
+
+/* Footer */
+footer {
+    background-color: #0f172a !important;
+    color: #94a3b8;
+    border-top: 1px solid #334155;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    margin-top: auto;
 }

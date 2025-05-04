@@ -1,19 +1,117 @@
+/* inbox.css - تصميم غامق عصري لصفحة الرسائل (Inbox) */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    overflow-x: hidden;
-  }
+  background: linear-gradient(to right, #0f172a, #1e293b);
+  color: #f1f5f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 90px;
+}
 
-  main {
-    margin-top: 100px;
-  }
 
-  header {
-    margin-left: 0;
-    z-index: 1030;
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
+/* === Navbar بتصميم غامق وأنيق === */
+.navbar {
+  background-color: #0f172a !important;
+  border-bottom: 1px solid #334155;
+}
 
-  #navbar {
-    margin-top: 80px;
-  }
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .navbar-text,
+.navbar .btn-outline-dark {
+  color: #e2e8f0 !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
+  color: #38bdf8 !important;
+}
+
+.btn-outline-dark {
+  border-color: #64748b;
+  color: #e2e8f0;
+}
+
+.btn-outline-dark:hover {
+  background-color: #38bdf8;
+  border-color: #38bdf8;
+  color: #0f172a !important;
+}
+
+/* === الشعار === */
+.logo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+/* === العناوين === */
+h3.text-primary {
+  color: #38bdf8 !important;
+}
+
+.card-header h5 {
+  color: #f1f5f9;
+}
+
+/* === بطاقات المعلومات والملفات === */
+.bg-white,
+.card,
+.shadow-sm,
+.border {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #334155 !important;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.3) !important;
+}
+
+/* === الجداول === */
+.table thead {
+  background-color: #334155;
+  color: #f1f5f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}َ
+
+/* === شارات الحالات (التذاكر) === */
+.badge.bg-success {
+  background-color: #22c55e !important; /* أخضر نيون */
+}
+
+.badge.bg-warning {
+  background-color: #facc15 !important;
+  color: #1e293b !important;
+}
+
+.badge.bg-danger {
+  background-color: #ef4444 !important;
+}
+
+.badge.bg-secondary {
+  background-color: #64748b !important;
+}
+
+/* Footer */
+footer {
+  background-color: #0f172a !important;
+  color: #94a3b8;
+  border-top: 1px solid #334155;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  margin-top: auto;
+}

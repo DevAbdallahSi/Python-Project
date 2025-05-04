@@ -1,23 +1,23 @@
-/* create_ticket.css - تصميم غامق عصري لصفحة إنشاء التذكرة */
-
+/* create_ticket.css - تصميم خارق لصفحة إنشاء التذاكر */
 /* تعيين الجسم ليكون Flexbox */
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
 }
-
 body {
   background: linear-gradient(to right, #0f172a, #1e293b);
   color: #f1f5f9;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 90px;
+  justify-content: space-between; /* لضمان أن الفوتر في الأسفل */
 }
 
-/* === Navbar بتصميم غامق وأنيق === */
+.card{
+  margin: 100px 0 0 0;
+}
+
+/* Navbar */
 .navbar {
   background-color: #0f172a !important;
   border-bottom: 1px solid #334155;
@@ -54,7 +54,7 @@ body {
   margin-right: 10px;
 }
 
-/* === Card تصميم بطاقات التذاكر === */
+/* Card */
 .card {
   background-color: #1e293b !important;
   color: #f1f5f9 !important;
@@ -62,7 +62,6 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(15, 23, 42, 0.3);
   transition: all 0.3s ease-in-out;
-  margin: 50px 0;
 }
 
 .card-header {
@@ -71,18 +70,16 @@ body {
 }
 
 .card-header h4 {
-  color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* ظل ناعم أبيض */
+  color: #38bdf8;
 }
 
-/* === Form Elements تصميم الحقول === */
+/* Form Elements */
 .form-control {
   background-color: #0f172a;
   color: #e2e8f0;
   border: 1px solid #334155;
   border-radius: 6px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 15px;
 }
 
 .form-control:focus {
@@ -92,7 +89,7 @@ body {
   color: #f8fafc;
 }
 
-/* === Buttons تصميم الأزرار === */
+/* Buttons */
 .btn-primary {
   background-color: #38bdf8;
   border-color: #38bdf8;
@@ -116,7 +113,7 @@ body {
   border-color: #475569;
 }
 
-/* === Footer ضمان أن الفوتر في أسفل الصفحة === */
+/* Footer */
 footer {
   background-color: #0f172a !important;
   color: #94a3b8;
@@ -124,5 +121,5 @@ footer {
   text-align: center;
   padding: 20px 0;
   font-size: 14px;
-  margin-top: auto;
+  margin-top: auto; /* هذا يضمن أن الفوتر يظل في أسفل الصفحة */
 }

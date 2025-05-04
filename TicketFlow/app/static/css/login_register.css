@@ -1,10 +1,87 @@
+/* login_register.css */
+
 body {
-    background: radial-gradient(circle, rgb(8, 85, 177) 30%, #010e54 99%);
-    color: white;
-    height: 100vh;
+    background: linear-gradient(to right, #00022b, #010e54);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#login-card,
-#register-card {
-    background: #daeaf7;
+h1.display-4 {
+    color: #4fa5d8;
+}
+
+p {
+    color: #0b89ef;
+}
+
+#login-card, #register-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: none;
+}
+
+#login-section h2,
+#register-section h3 {
+    color: #ffffff;
+    text-align: center;
+}
+
+label {
+    font-weight: 500;
+}
+
+input.form-control {
+    border: 1px solid #0855b1;
+    box-shadow: none;
+}
+
+input.form-control:focus {
+    border-color: #4fa5d8;
+    box-shadow: 0 0 0 0.2rem rgba(79, 165, 216, 0.25);
+}
+
+.btn-primary {
+    background-color: #0855b1;
+    border-color: #0855b1;
+}
+
+.btn-primary:hover {
+    background-color: #4fa5d8;
+    border-color: #4fa5d8;
+}
+
+.btn-outline-danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+hr {
+    border-top: 1px solid #ccc;
+}
+
+#login-section,
+#register-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Optional fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
