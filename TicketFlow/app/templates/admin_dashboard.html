@@ -166,9 +166,7 @@
                                         <td>{{ticket.priority}}</td>
                                         <td>{{ticket.department.name}}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-info"><i class="bi bi-eye"></i></button>
-                                            <button class="btn btn-sm btn-success"><i
-                                                    class="bi bi-check2-circle"></i></button>
+                                            <a href="/ticket/{{ ticket.id }}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
                                         </td>
                                     </tr>
                                     {% endfor %}

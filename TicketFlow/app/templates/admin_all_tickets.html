@@ -94,6 +94,7 @@
                     <th>Location</th>
                     <th>From</th>
                     <th>Assigned To</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -117,8 +118,11 @@
                     <td>{{ ticket.issuer.location }}</td>
                     <td>{{ ticket.issuer.first_name }}</td>
                     <td>{{ ticket.assigned_to.name }}</td>
+                    <td>
+                      <a href="/ticket/{{ ticket.id }}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
+                    </td>
                   </tr>
-                  {{ endfor }}
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
