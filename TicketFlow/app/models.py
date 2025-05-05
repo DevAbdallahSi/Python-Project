@@ -59,8 +59,8 @@ class Department(models.Model):
     def git_all_departmen():
         return Department.objects.all()
     
-    def git_departmen_by_id():
-        pass
+    def git_departmen_by_id(id):
+        return Department.objects.get(id=id)
 
 
 class User(models.Model):
@@ -209,3 +209,12 @@ class Ticket(models.Model):
         ticket.status = Status.objects.get(id=4)
         ticket.save()
 
+class ActivityLog(models.Model):
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def add_activity(string):
+        ActivityLog.objects.create(message=string)
+    
+    def get_all_activity():
+        return ActivityLog.objects.all()
