@@ -75,7 +75,7 @@
               <h4 class="mb-0 text-primary"><i class="bi bi-envelope-paper me-2"></i> Inbox</h4>
             </div>
             <div class="card-body">
-              {% for message in user_messeges %}
+              {% for message in user_messeges|slice:"::-1" %}
               <div class="bg-body-secondary p-3 rounded mb-3 shadow-sm">
                 <p class="mb-1">{{message.content}}</p>
                 <p class="mb-0">Comment: <strong>{{ message.comment }}</strong></p>

@@ -174,8 +174,6 @@
                                         <th>ID</th>
                                         <th>Title</th>
                                         <th>Status</th>
-                                        <th>Priority</th>
-                                        <th>Assigned To</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -185,8 +183,6 @@
                                         <td>{{ticket.id}}</td>
                                         <td>{{ticket.title}}</td>
                                         <td><span class="badge bg-warning text-dark">{{ticket.status.name}}</span></td>
-                                        <td>{{ticket.priority}}</td>
-                                        <td>{{ticket.department.name}}</td>
                                         <td>
                                             <a href="/ticket/{{ ticket.id }}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
                                         </td>
