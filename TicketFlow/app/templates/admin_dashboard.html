@@ -128,22 +128,16 @@
                                 <div class="card-body p-0">
                                     <div style="height: 130px; overflow-y: auto;">
                                         <ul class="list-group list-group-flush">
+                                            {% for activity in activities|slice:"::-1"%}
                                             <li class="list-group-item">
-                                                <i class="bi bi-building-fill-add text-primary me-2"></i> Admin created new department
+                                                {{activity.message}}
                                             </li>
-                                            <li class="list-group-item">
-                                                <i class="bi bi-check-circle-fill text-success me-2"></i> Resolved ticket #102
-                                            </li>
-                                            <li class="list-group-item">
-                                                <i class="bi bi-person-check-fill text-info me-2"></i> Assigned user to Support
-                                            </li>
-                                            <!-- Add more list items as needed -->
+                                            {% endfor %}
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                 
                     </div>
 
                     <!-- Charts -->
