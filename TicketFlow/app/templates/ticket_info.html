@@ -123,13 +123,17 @@
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assign-ticket-modal">Assign
                     Ticket</button>
                 {% else %}
+                {% if ticket.status.name == "In progress"%}
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#close-ticket-modal">Close
                     Ticket</button>
+                {% elif ticket.status.name != "Closed" %}
+                <p class="badge bg-secondary">Please mark the ticket as "In progress" to close it</p>
+                {% endif %}
                 {% endif %}
             </div>
         </div>
     </div>
-    <div class="modal fade" id="close-ticket-modal">
+    <div class="modal fade " id="close-ticket-modal">
 
         <div class="modal-dialog modal-dialog-centered modal-md">
 

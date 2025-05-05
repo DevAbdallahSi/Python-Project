@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.db.models import Q
 from django.contrib import messages
 from . import models
 from django.http import JsonResponse
@@ -270,3 +271,35 @@ def call_ai(request):
         department = models.Department.objects.filter(name=json_data['department']).first().id
         return JsonResponse({"priority":json_data['severity'].lower(), "department" :department})
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+def live_search(request):
+    user = models.User.get_user_by_id(request.session['user_id'])
+    query = request.GET.get('q', '')
+    results = []
+
+    if query:
+        if user.role != "admin:":
+            tickets = user.department.dp_tickets.filter(
+                Q(title__icontains=query) |
+                Q(description__icontains=query)
+            )
+        else:
+            tickets = models.Ticket.objects.filter(
+                Q(title__icontains=query) |
+                Q(description__icontains=query)
+            )
+        results = [
+            {
+                'id': t.id,
+                'title': t.title,
+                'description': t.description,
+                'status': t.status.name,
+                'created_at': t.created_at,
+                'location': t.issuer.location,
+                'issuer':t.issuer.first_name,
+                'assigned_to':t.assigned_to.name
+            }
+            for t in tickets
+        ]
+    
+    return JsonResponse(list(results), safe=False)
