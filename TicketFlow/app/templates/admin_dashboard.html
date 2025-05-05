@@ -43,11 +43,16 @@
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/create_ticket"><i class="bi bi-bar-chart-line me-1"></i> Create
+                        <a class="nav-link" href="/create_ticket"><i class="bi bi-plus-circle me-1"></i> Create
                             Ticket</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/inbox"><i class="bi bi-clock-history me-1"></i> Inbox</a>
+                        <a class="nav-link" href="/inbox">
+                            <i class="bi bi-clock-history me-1"></i> 
+                            Inbox{% if unread > 0 %}
+                            <span class="badge bg-danger">{{ unread }}</span>
+                            {% endif %}
+                        </a>
                     </li>
                 </ul>
                 <span class="navbar-text me-4 text-muted">
@@ -353,8 +358,8 @@
                     <form action="/assign_user_to_department" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="user_id" id="modal-id">
-                        <label for="department">Department</label>
-                        <select name="department_id">
+                        <label for="department" class="form-label">Department</label>
+                        <select name="department_id" class="form-select">
                             {% for department in departments %}
                             <option value="{{ department.id }}">{{ department.name }}</option>
                             {% endfor %}

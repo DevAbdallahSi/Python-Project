@@ -127,19 +127,33 @@ class Message(models.Model):
     comment=models.TextField()
     user=models.ForeignKey(User,related_name='messages',on_delete=models.CASCADE)
     department=models.ForeignKey(Department,related_name='department_messages',on_delete=models.CASCADE)
+    is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def create_messages(post):
         user = User.objects.get(id=post['issuer_id'])
-        department = Department.objects.get(id=post['department_id'])
-        content=post['message_content']
-        comment=post['comment']
-        message = Message.objects.create(content=content,comment=comment,user=user,department=department)
-        return message
+        if user.role == "admin":
+            department = Department.objects.get(id=post['department_id'])
+            content=post['message_content']
+            comment=post['comment']
+            Message.objects.create(content=content,comment=comment,user=user,department=department)
+        else:
+            admin = User.objects.get(id=1)
+            department = Department.objects.get(id=post['department_id'])
+            content=post['message_content']
+            comment=post['comment']
+            Message.objects.create(content=content,comment=comment,user=user,department=department)
+            Message.objects.create(content=content,comment=comment,user=admin,department=department)
 
     def show_messages():
         return Message.objects.all()
+    
+    def get_unread_count(user_id):
+        user = User.get_user_by_id(user_id)
+        count = Message.objects.filter(user=user,is_read=False).count()
+        return count
+
     
 class Status(models.Model):
     name = models.CharField(max_length=40)
