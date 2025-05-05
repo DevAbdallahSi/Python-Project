@@ -107,7 +107,18 @@ class User(models.Model):
         department = Department.objects.get(id=post["department_id"])
         user.department = department
         user.save()
-        
+
+    def update_user(post):
+        user = User.objects.get(id=post["user_id"])
+        user.first_name = post['first_name']
+        user.last_name = post['last_name']
+        user.email = post['email']
+        user.save()
+    
+    def delete_user(post):
+        user = User.objects.get(id=post["user_id"])
+        user.delete()
+
     def get_all_users():
         return User.objects.all()
 

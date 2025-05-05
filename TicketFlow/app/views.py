@@ -201,6 +201,25 @@ def add_new_ticket(request):
     else:
             return redirect('/landing')
 
+def update_user(request):
+    if 'user_id' in request.session:
+        if request.method == 'POST':
+            models.User.update_user(request.POST)
+            return redirect ('/dashboard')
+        else:
+            return redirect('/landing')
+    else:
+            return redirect('/landing')
+    
+def delete_user(request):
+    if 'user_id' in request.session:
+        if request.method == 'POST':
+            models.User.delete_user(request.POST)
+            return redirect ('/dashboard')
+        else:
+            return redirect('/landing')
+    else:
+            return redirect('/landing')
 
 def change_user_role(request):
     if 'user_id' in request.session:

@@ -22,5 +22,7 @@ urlpatterns = [
     path('close_ticket',views.close_ticket),
     path('mark_inprogress',views.mark_inprogress),
     path('call_ai',views.call_ai),
-    path('search',views.live_search)
+    path('search',views.live_search),
+    path('delete_user',views.delete_user),
+    path('update_user',views.update_user),
 ]
