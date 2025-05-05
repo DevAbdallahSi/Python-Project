@@ -1,5 +1,4 @@
 import requests
-# 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
 
 OLLAMA_URL = "http://100.104.176.55:11434/api/generate"
 MODEL = "phi3"
