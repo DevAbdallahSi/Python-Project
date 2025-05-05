@@ -25,7 +25,8 @@ def dashboard(request):
                 "ticket_open":len(open),
                 "tickets":not_assigned,
                 "tickets_total": len(models.Ticket.objects.all()),
-                "activities": models.ActivityLog.get_all_activity()
+                "activities": models.ActivityLog.get_all_activity(),
+                "unread":models.Message.get_unread_count(user_id)
             }
             return render(request,'admin_dashboard.html',context)
         if user.role == 'staff':
@@ -39,7 +40,9 @@ def dashboard(request):
                     "ticket_open":len(user.department.dp_tickets.filter(status=2)),
                     "tickets_total":len(total),
                     "tickets_progress": len(user.department.dp_tickets.filter(status=4)),
-                    "tickets":open
+                    "tickets":open,
+                    "unread":models.Message.get_unread_count(user_id)
+
                 }
             else:
                 context={
@@ -48,7 +51,8 @@ def dashboard(request):
                     "ticket_open":0,
                     "tickets_total":0,
                     "tickets_progress": 0,
-                    "tickets":[]
+                    "tickets":[],
+                    "unread":models.Message.get_unread_count(user_id)
                 }
             return render(request,'departmint_dashborde.html',context)
         if user.role == 'user':
@@ -127,7 +131,8 @@ def create_ticket(request):
         user_id=request.session['user_id']
         user=models.User.get_user_by_id(user_id)
         context={
-            'user':user
+            'user':user,
+            "unread":models.Message.get_unread_count(user_id)
         }
         return render (request,'user_create_ticket.html',context)
     else:
@@ -139,18 +144,13 @@ def inbox(request):
     if 'user_id' in request.session:
         user_id=request.session['user_id']
         user=models.User.get_user_by_id(user_id)
-        if user.role != 'admin':
-            context={
-                'user':user,
-                'user_messeges':user.messages.all(),
-            }
-            return render (request,'user_inbox.html',context)
-        else:
-            context={
-                'user':user,
-                'user_messeges':models.Message.show_messages(),
-            }
-            return render (request,'user_inbox.html',context)
+        unread_messages = models.Message.objects.filter(user=user, is_read=False)
+        unread_messages.update(is_read=True)
+        context={
+            'user':user,
+            'user_messeges':user.messages.all(),
+        }
+        return render (request,'user_inbox.html',context)
     else:
         return redirect('/landing')
 
@@ -160,7 +160,8 @@ def all_users(request):
         user=models.User.get_user_by_id(user_id)
         context={
             'user':user,
-            'users':models.User.get_all_users()
+            'users':models.User.get_all_users(),
+            "unread":models.Message.get_unread_count(user_id)
         }
         return render (request,'admin_users_page.html',context)
     else:
@@ -170,17 +171,20 @@ def all_tickets(request):
     if 'user_id' in request.session:
         user_id=request.session['user_id']
         user=models.User.get_user_by_id(user_id)
+        print(models.Message.get_unread_count(user_id))
         if user.role == 'admin':
             context={
                 'user':user,
-                'all_tickets':models.Ticket.show_tickets()
+                'all_tickets':models.Ticket.show_tickets(),
+                "unread":models.Message.get_unread_count(user_id)
             }
             return render (request,'admin_all_tickets.html',context)
         else:
             if user.role =='staff':
                 context={
                     'user':user,
-                    'all_tickets':models.Ticket.get_tickets_for_user_department(user_id)
+                    'all_tickets':models.Ticket.get_tickets_for_user_department(user_id),
+                    "unread":models.Message.get_unread_count(user_id)
                 }
                 return render (request,'admin_all_tickets.html',context) 
             else:
@@ -267,6 +271,7 @@ def ticket_info(request,ticket_id):
             "user":user,
             "ticket":ticket,
             "departments": models.Department.git_all_departmen(),
+            "unread":models.Message.get_unread_count(user.id)
         }
         return render(request,"ticket_info.html",context)
     else:
