@@ -13,7 +13,7 @@
 
     {% load static %}
     {% load ticket_filters %}
-    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'img/logo.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/department_dash.css' %}">
 
     
@@ -105,12 +105,12 @@
                 <h5 class="mb-0">Ticket Status Overview</h5>
             </div>
             <div class="card-body">
-                <canvas id="ticketChart" height="100"></canvas>
+                <canvas id="ticketChart" height="60"></canvas>
             </div>
         </div>
 
         <!-- Tickets Table -->
-        <div class="card shadow">
+        <div class="card shadow mt-0">
             <div class="card-header">
                 <h5 class="mb-0">Department Tickets</h5>
             </div>
@@ -160,7 +160,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="text-center py-3 bg-light mt-auto">
+    <footer class="text-center py-3 bg-light mt-3">
         <div class="container">
             <span class="text-muted">&copy; <span id="currentYear"></span> TicketFlow. All rights reserved.</span>
         </div>
