@@ -117,7 +117,7 @@ def create_department(request):
                     messages.error(request, v)
                 return redirect('/landing')
             else:
-                string = f" admin add a new department: {request.POST["department_name"]}"
+                string = f" admin add a new department: {request.POST['department_name']}"
                 models.ActivityLog.add_activity(string)
                 new_department=models.Department.create_department(request.POST)
                 return redirect('/dashboard')
