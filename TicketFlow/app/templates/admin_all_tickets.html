@@ -72,7 +72,8 @@
 
           <!-- Search Box -->
           <div class="mb-4 search-box">
-            <input type="text" id="search-input" class="form-control" placeholder="Search for a ticket..." autocomplete="off">
+            <input type="text" id="search-input" class="form-control" placeholder="Search for a ticket..."
+              autocomplete="off">
           </div>
 
           <!-- All Tickets Table -->
@@ -96,7 +97,7 @@
                 </thead>
                 <tbody id="result">
                   <!-- Loop start -->
-                  {% for ticket in all_tickets %}
+                  {% for ticket in all_tickets|slice:"::-1" %}
                   <tr>
                     <td>{{ ticket.id }}</td>
                     <td>{{ ticket.title }}</td>
@@ -117,6 +118,14 @@
                     <td>{{ ticket.assigned_to.name }}</td>
                     <td>
                       <a href="/ticket/{{ ticket.id }}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
+                      {% if ticket.status.name == "Open"%}
+                      <form action="/mark_inprogress" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="ticket_id" value="{{ticket.id}}">
+                        <button type="submit" class="btn btn-sm btn-warning" title="Mark In-progress"><i
+                            class="bi bi-check2-circle"></i></button>
+                      </form>
+                      {% endif %}
                     </td>
                   </tr>
                   {% endfor %}

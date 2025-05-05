@@ -137,6 +137,7 @@
                             <table class="table table-bordered">
                                 <thead class="table-light">
                                     <tr>
+                                        <th>ID</th>
                                         <th>Username</th>
                                         <th>Role</th>
                                         <th>Email</th>
@@ -147,6 +148,7 @@
                                 <tbody>
                                     {% for user in users %}
                                     <tr>
+                                        <td>{{user.id}}</td>
                                         <td>{{user.first_name}} {{user.last_name}}</td>
                                         <td>{{user.role}}</td>
                                         <td>{{user.email}}</td>

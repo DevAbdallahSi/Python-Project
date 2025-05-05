@@ -126,7 +126,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for ticket in tickets%}
+                        {% for ticket in tickets|slice:"::-1"%}
                         <tr>
                             <td>#{{ticket.id}}</td>
                             <td>{{ticket.title}}</td>
