@@ -16,194 +16,211 @@
 
 <body>
 
-<!-- Header -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top shadow px-4">
-    <div class="container-fluid">
-        <img src="{% static '/img/logo.jpg' %}" alt="logo" class="logo">
-        <a class="navbar-brand fw-bold" href="/dashboard">TicketFlow</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
-            aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top shadow px-4">
+        <div class="container-fluid">
+            <img src="{% static '/img/logo.jpg' %}" alt="logo" class="logo">
+            <a class="navbar-brand fw-bold" href="/dashboard">TicketFlow</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarMenu">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="/dashboard"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
-                </li>
-                {% if user.role == "admin" or user.role == "staff" %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/tickets"><i class="bi bi-ticket-detailed me-1"></i> All Tickets</a>
-                </li>
-                {% endif %}
-                {% if user.role == "admin" %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/all_users"><i class="bi bi-ticket-detailed me-1"></i> All Users</a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/create_ticket"><i class="bi bi-bar-chart-line me-1"></i> Create Ticket</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/inbox"><i class="bi bi-clock-history me-1"></i> Inbox</a>
-                </li>
-            </ul>
-            <span class="navbar-text me-4 text-muted">
-                {% if user.role == "admin" %}
-                Admin Panel - {{ user.first_name }} {{ user.last_name }}
-                {% elif user.role == "staff" %}
-                Help Desk - {{ user.department.name }} - {{ user.first_name }} {{ user.last_name }}
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+                    </li>
+                    {% if user.role == "admin" or user.role == "staff" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tickets"><i class="bi bi-ticket-detailed me-1"></i> All Tickets</a>
+                    </li>
+                    {% endif %}
+                    {% if user.role == "admin" %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/all_users"><i class="bi bi-ticket-detailed me-1"></i> All Users</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/create_ticket"><i class="bi bi-bar-chart-line me-1"></i> Create
+                            Ticket</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/inbox"><i class="bi bi-clock-history me-1"></i> Inbox</a>
+                    </li>
+                </ul>
+                <span class="navbar-text me-4 text-muted">
+                    {% if user.role == "admin" %}
+                    Admin Panel - {{ user.first_name }} {{ user.last_name }}
+                    {% elif user.role == "staff" %}
+                    Help Desk - {{ user.department.name }} - {{ user.first_name }} {{ user.last_name }}
+                    {% else %}
+                    Employee - {{ user.department.name }} - {{ user.first_name }} {{ user.last_name }}
+                    {% endif %}
+                </span>
+                <a class="btn btn-outline-dark" href="/logout">
+                    <i class="bi bi-box-arrow-right"></i>Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Ticket Info Form -->
+    <div class="container " id="main">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-1 ">Ticket Information</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">ID</label>
+                            <input type="text" class="form-control" value="{{ticket.id}}" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-control" value="{{ticket.title}}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Status</label>
+                            <input type="text" class="form-control" value="{{ticket.status.name}}" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Priority</label>
+                            <input type="text" class="form-control" value="{{ticket.priority}}" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Issue Date</label>
+                            <input type="text" class="form-control" value="{{ticket.created_at}}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Issuer</label>
+                            <input type="text" class="form-control" value="{{ticket.issuer.id}}" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Assigned To</label>
+                            <input type="text" class="form-control" value="{{ticket.assigned_to.name}}" disabled>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Location</label>
+                            <input type="text" class="form-control" value="{{ticket.location}}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" rows="4" disabled>{{ticket.description}}</textarea>
+                    </div>
+                </form>
+                {% if ticket.status.name == "Not assigned"%}
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assign-ticket-modal">Assign
+                    Ticket</button>
                 {% else %}
-                Employee - {{ user.department.name }} - {{ user.first_name }} {{ user.last_name }}
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#close-ticket-modal">Close
+                    Ticket</button>
                 {% endif %}
-            </span>
-            <a class="btn btn-outline-dark" href="/logout">
-                <i class="bi bi-box-arrow-right"></i>Logout</a>
-        </div>
-    </div>
-</nav>
-
-<!-- Ticket Info Form -->
-<div class="container " id="main">
-    <div class="card shadow">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-1 ">Ticket Information</h5>
-        </div>
-        <div class="card-body">
-            <form>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label class="form-label">ID</label>
-                        <input type="text" class="form-control" value="{{ticket.id}}" disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control" value="{{ticket.title}}" disabled>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Status</label>
-                        <input type="text" class="form-control" value="{{ticket.status.name}}" disabled>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Priority</label>
-                        <input type="text" class="form-control" value="{{ticket.priority}}" disabled>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Issue Date</label>
-                        <input type="text" class="form-control" value="{{ticket.created_at}}" disabled>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label class="form-label">Issuer</label>
-                        <input type="text" class="form-control" value="{{ticket.issuer.id}}" disabled>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Assigned To</label>
-                        <input type="text" class="form-control" value="{{ticket.assigned_to.name}}" disabled>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Location</label>
-                        <input type="text" class="form-control" value="{{ticket.location}}" disabled>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Description</label>
-                    <textarea class="form-control" rows="4" disabled>{{ticket.description}}</textarea>
-                </div>
-            </form>
-            {% if ticket.status.name == "Not assigned"%}
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assign-ticket-modal">Assign Ticket</button>
-            {% else %}
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#close-ticket-modal">Close Ticket</button>
-            {% endif %}
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="close-ticket-modal">
-
-    <div class="modal-dialog modal-dialog-centered modal-md">
-
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h5 class="modal-title" id="close-ticket-modal-Label">Add Comment</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                <form action="/close_ticket" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="department_id" value="{{ticket.assigned_to.id}}">
-                    <input type="hidden" name="issuer_id" value="{{ticket.issuer.id}}">
-                    <input type="hidden" name="ticket_id" value="{{ticket.id}}">
-                    <input type="text" name="message_content" value="User id:{{ticket.issuer.id}} , ticket ID:{{ticket.id}}"><br>
-                    <label for="comment">Comment</label>
-                    <input type="text" name="comment"><br>
-                    </label>
-                    <div class="modal-footer justify-content-center">
-                        <button type="submit" class="btn btn-primary">Close & Send</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="assign-ticket-modal">
+    <div class="modal fade" id="close-ticket-modal">
 
-    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-dialog modal-dialog-centered modal-md">
 
-        <div class="modal-content">
+            <div class="modal-content">
 
-            <div class="modal-header">
-                <h5 class="modal-title" id="assign-ticket-modal-Label">Assign Ticket</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="close-ticket-modal-Label">Add Comment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-            <div class="modal-body">
-                <form action="/assign" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="ticket_id" value="{{ticket.id}}">
-                    <label for="priority"></label>
-                    <select name="priority" required>
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                        <option value="critical">Critical</option>
-                    </select>
-                    <label for="department_name">Department</label>
-                    <select name="department_name" required>
-                        {% for department in departments%}
-                        <option value="{{department.id}}">{{department.name}}</option>
-                        {% endfor %}
-                    </select><br>
-                    </label>
-                    <div class="modal-footer justify-content-center">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
+                <div class="modal-body">
+                    <form action="/close_ticket" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="department_id" value="{{ticket.assigned_to.id}}">
+                        <input type="hidden" name="issuer_id" value="{{ticket.issuer.id}}">
+                        <input type="hidden" name="ticket_id" value="{{ticket.id}}">
+                        <input type="text" name="message_content"
+                            value="User id:{{ticket.issuer.id}} , ticket ID:{{ticket.id}}"><br>
+                        <label for="comment">Comment</label>
+                        <input type="text" name="comment"><br>
+                        </label>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-primary">Close & Send</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Footer -->
-<footer class="text-center py-3 bg-light mt-auto">
-    <div class="container">
-        <span class="text-muted">&copy; <span id="currentYear"></span> TicketFlow. All rights reserved.</span>
+    <div class="modal fade" id="assign-ticket-modal">
+
+        <div class="modal-dialog modal-dialog-centered modal-md">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="assign-ticket-modal-Label">Assign Ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form action="/assign" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="ticket_id" value="{{ticket.id}}">
+                        <label for="priority">Priority</label>
+                        <select name="priority" id="priority" required>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="critical">Critical</option>
+                        </select>
+                        <label for="department_name" >Department</label>
+                        <select name="department_name" id="department" required>
+                            {% for department in departments%}
+                            <option value="{{department.id}}">{{department.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <div id="loading" class="text-center my-2" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                          </div>
+                        <br>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                    <form id="ai_form">
+                        {% csrf_token %}
+                        <input type="hidden" id="description" value="{{ticket.description}}">
+                        <button type="submit" class="btn btn-success">Let AI decide</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</footer>
-<script>
-    document.getElementById("currentYear").textContent = new Date().getFullYear();
-</script>
+    <!-- Footer -->
+    <footer class="text-center py-3 bg-light mt-auto">
+        <div class="container">
+            <span class="text-muted">&copy; <span id="currentYear"></span> TicketFlow. All rights reserved.</span>
+        </div>
+    </footer>
+    <script>
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+    </script>
 
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../static/scripts/ai_classify.js"></script>
 
 </body>
+
 </html>

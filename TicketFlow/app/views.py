@@ -2,7 +2,8 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from . import models
 from django.http import JsonResponse
-import bcrypt
+import json
+from . import ai
 
 def index(request):
     return redirect ('/landing')
@@ -259,3 +260,13 @@ def mark_inprogress(request):
             return redirect('/landing')
     else:
         return redirect('/landing')
+    
+
+def call_ai(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        description = data.get('description', '')
+        json_data = ai.classify_ticket(description)
+        department = models.Department.objects.filter(name=json_data['department']).first().id
+        return JsonResponse({"priority":json_data['severity'].lower(), "department" :department})
+    return JsonResponse({'error': 'Invalid request'}, status=400)
