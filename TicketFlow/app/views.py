@@ -24,7 +24,8 @@ def dashboard(request):
                 "ticket_closed":len(closed),
                 "ticket_open":len(open),
                 "tickets":not_assigned,
-                "tickets_total": len(models.Ticket.objects.all())
+                "tickets_total": len(models.Ticket.objects.all()),
+                "activities": models.ActivityLog.get_all_activity()
             }
             return render(request,'admin_dashboard.html',context)
         if user.role == 'staff':
@@ -112,6 +113,8 @@ def create_department(request):
                     messages.error(request, v)
                 return redirect('/landing')
             else:
+                string = f" admin add a new department: {request.POST["department_name"]}"
+                models.ActivityLog.add_activity(string)
                 new_department=models.Department.create_department(request.POST)
                 return redirect('/dashboard')
         else:
@@ -194,7 +197,10 @@ def add_new_ticket(request):
                     messages.error(request, v)
                 return redirect('/landing')
             else:
+                user=models.User.get_user_by_id(request.session['user_id'])
                 ticket=models.Ticket.create_ticket(request.POST)
+                string = f"New ticket Created #{ticket.id} by user: {user.first_name} {user.last_name}"
+                models.ActivityLog.add_activity(string)
                 return redirect ('/dashboard')
         else:
             return redirect('/landing')
@@ -204,7 +210,9 @@ def add_new_ticket(request):
 def update_user(request):
     if 'user_id' in request.session:
         if request.method == 'POST':
+            string = f"Admin updated user: {request.POST['first_name']} {request.POST['last_name']}"
             models.User.update_user(request.POST)
+            models.ActivityLog.add_activity(string)
             return redirect ('/dashboard')
         else:
             return redirect('/landing')
@@ -214,7 +222,10 @@ def update_user(request):
 def delete_user(request):
     if 'user_id' in request.session:
         if request.method == 'POST':
+            user = models.User.get_user_by_id(request.POST['user_id'])
+            string = f"Admin deleted user: {user.first_name} {user.last_name}"
             models.User.delete_user(request.POST)
+            models.ActivityLog.add_activity(string)
             return redirect ('/dashboard')
         else:
             return redirect('/landing')
@@ -224,6 +235,9 @@ def delete_user(request):
 def change_user_role(request):
     if 'user_id' in request.session:
         if request.method == 'POST':
+            user = models.User.get_user_by_id(request.POST['user_id'])
+            string = f"Admin updated user: {user.first_name} {user.last_name} role to : {request.POST['role']}"
+            models.ActivityLog.add_activity(string)
             models.User.update_user_role(request.POST)
             return redirect('/dashboard')
         else:
@@ -234,6 +248,10 @@ def change_user_role(request):
 def assign_user_to_department(request):
     if 'user_id' in request.session:
         if request.method == 'POST':
+            user = models.User.get_user_by_id(request.POST['user_id'])
+            department = models.Department.git_departmen_by_id(request.POST['department_id'])
+            string = f"Admin assigned user: {user.first_name} {user.last_name} to department : {department.name}"
+            models.ActivityLog.add_activity(string)
             models.User.update_user_department(request.POST)
             return redirect('/dashboard')
         else:
@@ -257,6 +275,9 @@ def ticket_info(request,ticket_id):
 def assign(request):
     if 'user_id' in request.session:
         if request.method == "POST":
+            department = models.Department.git_departmen_by_id(request.POST['department_name'])
+            string = f"Admin assigned ticket #{request.POST['ticket_id']} to department : {department.name}"
+            models.ActivityLog.add_activity(string)
             models.Ticket.assign_ticket(request.POST)
             return redirect('/dashboard')
         else:
@@ -267,6 +288,9 @@ def assign(request):
 def close_ticket(request):
     if 'user_id' in request.session:
         if request.method == "POST":
+            user = models.User.get_user_by_id(request.session['user_id'])
+            string = f"Ticket #{request.POST['ticket_id']} was closed by staff: {user.first_name} {user.last_name} "
+            models.ActivityLog.add_activity(string)
             models.Ticket.close_ticket(request.POST)
             return redirect('/dashboard')
         else:
@@ -277,6 +301,9 @@ def close_ticket(request):
 def mark_inprogress(request):
     if 'user_id' in request.session:
         if request.method == "POST":
+            user = models.User.get_user_by_id(request.session['user_id'])
+            string = f"Ticket #{request.POST['ticket_id']} was marked in progress by user: {user.first_name} {user.last_name} "
+            models.ActivityLog.add_activity(string)
             models.Ticket.mark_ticket(request.POST)
             return redirect('/dashboard')
         else:
