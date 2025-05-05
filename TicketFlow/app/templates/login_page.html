@@ -12,14 +12,17 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-
+    
     <!-- Main Content -->
     <main class="container flex-grow-1 d-flex justify-content-between">
-        <div class="text-start mt-5">
-            <h1 class="display-4">TicketFlow</h1>
-            <p>Our Support Ticketing System is designed to streamline how we handle requests, issues, and inquiries.</p>
-            <p>We provide a centralized, organized, and efficient platform to ensure every ticket is tracked, prioritized, and resolved in a timely manner.</p>
-            <p>Our goal is to enhance communication, improve service quality, and deliver reliable support to all departments and users.</p>
+        <div class="text-start mt-5 ">
+            <button class="button" data-text="Awesome">
+                <span class="actual-text">&nbsp;TicketFlow&nbsp;</span>
+                <span aria-hidden="true" class="hover-text">&nbsp;TicketFlow&nbsp;</span>
+            </button>
+            <p><strong>Our Support Ticketing System is designed to streamline how we handle requests, issues, and inquiries.</strong></p>
+            <p><strong>We provide a centralized, organized, and efficient platform to ensure every ticket is tracked, prioritized, and resolved in a timely manner.</strong></p>
+            <p><strong>Our goal is to enhance communication, improve service quality, and deliver reliable support to all departments and users.</strong></p>
         </div>
 
         <!-- Login Section -->
@@ -42,7 +45,7 @@
                             <a href="/forgot_password" class="text-decoration-none">Forgot your password?</a>
                         </div>
                     </form>
-                    <p class="text-center">Don't have an account? <button id="show-register" class="btn btn-primary">Register</button></p>
+                    <p class="text-center text-black">Don't have an account? <button id="show-register" class="btn btn-primary">Register</button></p>
                     <div class="d-flex align-items-center my-3">
                         <hr class="flex-grow-1">
                         <span class="mx-2">OR</span>
@@ -56,10 +59,10 @@
         </div>
 
         <!-- Register Section (Hidden by default) -->
-        <div id="register-section" style="display: none;" class="container mt-3">
+        <div id="register-section" style="display: none;" class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <h3>Register</h3>
+                    <h2>Register</h2>
                     <div id="register-card" class="card shadow-sm">
                         <div class="card-body">
                             <form action="/register" method="POST">
@@ -100,9 +103,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-light text-center  mt-3 py-3 w-100">
-        <div class="container-fluid">
-            <span class="text-muted">&copy; <span id="currentYear"></span> TicketFlow. All rights reserved.</span>
+
+    <footer class="text-center py-3 w-100">
+        <div class="container-fluid" >
+            <span >&copy; <span id="currentYear"></span> TicketFlow. All rights reserved.</span>
         </div>
     </footer>
 

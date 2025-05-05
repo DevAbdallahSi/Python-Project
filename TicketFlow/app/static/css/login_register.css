@@ -7,12 +7,31 @@ body, html {
 }
 
 body {
+    position: relative;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to right, #f3f4f6, #e2e8f0);
+    color: #333;
+    min-height: 100vh;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100%;
+    overflow: hidden;
 }
+
+/* Add blurred background image */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/static/img/back.jpg') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(8px); /* Adjust blur as needed */
+    z-index: -1;
+}
+
+
 
 /* Card */
 .card {
@@ -43,8 +62,61 @@ body {
 
 /* Footer */
 footer {
-    background-color: #f9fafb;
-    color: #6b7280;
+    color: #ffffff;
 }
 
 
+/* === removing default button style ===*/
+.button {
+    margin: 0;
+    height: auto;
+    background: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* button styling */
+  .button {
+    --border-right: 6px;
+    --text-stroke-color: rgb(255, 255, 255);
+    --animation-color: #4c7ee3;
+    --fs-size: 2em;
+    letter-spacing: 3px;
+    text-decoration: none;
+    font-size: 80px;
+    font-family: "Arial";
+    position: relative;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text-stroke-color);
+  }
+  /* this is the text, when you hover on button */
+  .hover-text {
+    position: absolute;
+    box-sizing: border-box;
+    content: attr(data-text);
+    color: var(--animation-color);
+    width: 0%;
+    inset: 0;
+    border-right: var(--border-right) solid var(--animation-color);
+    overflow: hidden;
+    transition: 0.5s;
+    -webkit-text-stroke: 1px var(--animation-color);
+  }
+  /* hover */
+  .button:hover .hover-text {
+    width: 100%;
+    filter: drop-shadow(0 0 23px var(--animation-color))
+  }
+h2{
+    color: white;
+}
+
+.container{
+    margin-top: 100px;
+}
+p{
+    font-size:large;
+    color: #ffffff;
+}

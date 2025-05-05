@@ -69,7 +69,7 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
     role=models.CharField(max_length=50 ,default='user')
-    location=models.CharField(max_length=50)
+    location=models.CharField(max_length=50 ,default='Ramallah')
     google_id=models.CharField(max_length=255,null=True, blank=True)
     department=models.ForeignKey(Department,related_name='users',on_delete=models.CASCADE ,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
