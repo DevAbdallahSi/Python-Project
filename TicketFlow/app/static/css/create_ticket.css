@@ -1,47 +1,51 @@
+/* create_ticket.css - تصميم جديد مع ألوان ساطعة */
 
+/* تعيين الجسم ليكون Flexbox */
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0;
 }
 
 body {
-    background: linear-gradient(to right, #8c919c, #efeff2);
-    color: #f1f5f9;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: 90px;
+  background: linear-gradient(to right, #f3f4f6, #e2e8f0); /* خلفية فاتحة */
+  color: #333; /* نص بلون غامق */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* لضمان أن الفوتر في الأسفل */
 }
 
-/* === Navbar بتصميم غامق وأنيق === */
+.card {
+  margin: 100px 0 0 0;
+}
+
+/* Navbar */
 .navbar {
-    background-color: #404756 !important;
-    border-bottom: 1px solid #334155;
-  }
+  background-color: #ffffff !important; /* خلفية فاتحة */
+  border-bottom: 1px solid #e5e7eb; /* حدود ناعمة */
+}
 
 .navbar .navbar-brand,
 .navbar .nav-link,
 .navbar .navbar-text,
 .navbar .btn-outline-dark {
-  color: #e2e8f0 !important;
+  color: #1f2937 !important; /* نص غامق */
 }
 
 .navbar .nav-link:hover,
 .navbar .navbar-brand:hover {
-  color: #38bdf8 !important;
+  color: #2563eb !important; /* لون أزرق فاتح عند التمرير */
 }
 
 .btn-outline-dark {
-  border-color: #64748b;
-  color: #e2e8f0;
+  border-color: #e5e7eb;
+  color: #1f2937;
 }
 
 .btn-outline-dark:hover {
-  background-color: #38bdf8;
-  border-color: #38bdf8;
-  color: #0f172a !important;
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff !important;
 }
 
 .logo {
@@ -52,83 +56,73 @@ body {
   margin-right: 10px;
 }
 
-/* === Card تصميم بطاقات التذاكر === */
+/* Card */
 .card {
-    background-color: #404756 !important;
-    color: #f1f5f9 !important;
-    border: 1px solid #334155;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.3);
-    transition: all 0.3s ease-in-out;
-    margin: 50px 0;
+  background-color: #ffffff !important; /* خلفية فاتحة */
+  color: #333 !important; /* نص غامق */
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 }
 
 .card-header {
-  background-color: transparent !important;
-  border-bottom: 1px solid #334155;
+  background-color: #f9fafb !important; /* خلفية فاتحة */
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .card-header h4 {
-  color: #ffffff;
-  text-shadow: 0 2px 4px rgba(103, 99, 99, 0.4); 
+  color: #2563eb;
 }
 
-/* === Form Elements تصميم الحقول === */
+/* Form Elements */
 .form-control {
-  background-color: #1e293b;
-  color: #e2e8f0;
-  border: 1px solid #334155;
+  background-color: #f9fafb; /* خلفية فاتحة */
+  color: #333;
+  border: 1px solid #e5e7eb;
   border-radius: 6px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 15px;
 }
 
 .form-control:focus {
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 0.2rem rgba(56, 189, 248, 0.25);
-  background-color: #1e293b;
-  color: #f8fafc;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+  background-color: #ffffff;
+  color: #333;
 }
 
-/* === Buttons تصميم الأزرار === */
+/* Buttons */
 .btn-primary {
-  background-color: #38bdf8;
-  border-color: #38bdf8;
-  color: #0f172a;
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
   transition: background-color 0.2s ease-in-out;
 }
 
 .btn-primary:hover {
-  background-color: #0ea5e9;
-  border-color: #0ea5e9;
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
 }
 
 .btn-secondary {
-  background-color: #64748b;
-  border-color: #64748b;
-  color: #f1f5f9;
+  background-color: #9ca3af;
+  border-color: #9ca3af;
+  color: #ffffff;
 }
 
 .btn-secondary:hover {
-  background-color: #475569;
-  border-color: #475569;
+  background-color: #6b7280;
+  border-color: #6b7280;
 }
 
-/* === Footer ضمان أن الفوتر في أسفل الصفحة === */
+/* Footer */
+/* Footer */
 footer {
-  background-color: #0f172a !important;
-  color: #94a3b8;
-  border-top: 1px solid #334155;
+  background-color: #f9fafb !important; /* خلفية فاتحة */
+  color: #6b7280;
+  border-top: 1px solid #e5e7eb;
   text-align: center;
   padding: 20px 0;
   font-size: 14px;
-  margin-top: auto;
-}
-.bg-light {
-    --bs-bg-opacity: 1;
-    background-color: #606771 !important;
-}
-.text-primary {
-    --bs-text-opacity: 1;
-    color: whitesmoke !important;
+  margin-top: auto; /* هذا يضمن أن الفوتر يظل في أسفل الصفحة */
 }

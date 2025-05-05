@@ -1,47 +1,51 @@
+/* inbox.css - تصميم جديد مع خلفية فاتحة */
 
+/* تعيين الجسم ليكون Flexbox */
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0;
 }
 
 body {
-  background: linear-gradient(to right, #0f172a, #1e293b);
-  color: #f1f5f9;
+  background: linear-gradient(to right, #f3f4f6, #e2e8f0); /* خلفية فاتحة */
+  color: #333; /* نص غامق */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 90px;
+  justify-content: space-between; /* لضمان أن الفوتر في الأسفل */
+}
+
+.card {
+  margin: 100px 0 0 0;
 }
 
 /* Navbar */
 .navbar {
-  background-color: #0f172a !important;
-  border-bottom: 1px solid #334155;
+  background-color: #ffffff !important; /* خلفية فاتحة */
+  border-bottom: 1px solid #e5e7eb; /* حدود ناعمة */
 }
 
 .navbar .navbar-brand,
 .navbar .nav-link,
 .navbar .navbar-text,
 .navbar .btn-outline-dark {
-  color: #e2e8f0 !important;
+  color: #1f2937 !important; /* نص غامق */
 }
 
 .navbar .nav-link:hover,
 .navbar .navbar-brand:hover {
-  color: #38bdf8 !important;
+  color: #2563eb !important; /* لون أزرق فاتح عند التمرير */
 }
 
 .btn-outline-dark {
-  border-color: #64748b;
-  color: #e2e8f0;
+  border-color: #e5e7eb;
+  color: #1f2937;
 }
 
 .btn-outline-dark:hover {
-  background-color: #38bdf8;
-  border-color: #38bdf8;
-  color: #0f172a !important;
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff !important;
 }
 
 .logo {
@@ -52,52 +56,47 @@ body {
   margin-right: 10px;
 }
 
-/* Main Card */
+/* Card */
 .card {
-  background-color: #1e293b !important;
-  border: 1px solid #334155;
+  background-color: #ffffff !important; /* خلفية فاتحة */
+  color: #333 !important; /* نص غامق */
+  border: 1px solid #e5e7eb;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.3);
-  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
 }
 
-/* Card Header */
 .card-header {
-  background-color: transparent !important;
-  border-bottom: 1px solid #334155;
+  background-color: #f9fafb !important; /* خلفية فاتحة */
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .card-header h4 {
-  color: #38bdf8;
+  color: #2563eb;
 }
 
-/* Inbox Messages */
+/* Form Elements */
 .bg-body-secondary {
-  background-color: #334155 !important;
-  color: #f8fafc !important;
-  border-left: 4px solid #38bdf8;
-  padding: 15px;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  transition: background-color 0.3s ease;
+  background-color: #f9fafb !important; /* خلفية فاتحة */
+  color: #333;
 }
 
-.bg-body-secondary:hover {
-  background-color: #475569 !important;
+.bg-body-secondary p {
+  color: #333;
 }
 
-/* Emphasized text inside messages */
-p strong {
-  color: #38bdf8;
+.bg-body-secondary .shadow-sm {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Footer */
+/* Footer */
 footer {
-  background-color: #0f172a !important;
-  color: #94a3b8;
-  border-top: 1px solid #334155;
+  background-color: #f9fafb !important; /* خلفية فاتحة */
+  color: #6b7280;
+  border-top: 1px solid #e5e7eb;
   text-align: center;
   padding: 20px 0;
   font-size: 14px;
-  margin-top: auto;
+  margin-top: auto; /* هذا يضمن أن الفوتر يظل في أسفل الصفحة */
 }

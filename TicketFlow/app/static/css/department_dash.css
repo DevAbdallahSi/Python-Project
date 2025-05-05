@@ -1,10 +1,80 @@
-body {
-    padding-top: 70px;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+/* create_ticket.css - تصميم جديد مع ألوان ساطعة */
+
+/* تعيين الجسم ليكون Flexbox */
+html, body {
+    height: 100%;
+    margin: 0;
 }
 
-main {
-    flex: 1;
+body {
+    background: linear-gradient(to right, #f3f4f6, #e2e8f0); /* خلفية فاتحة */
+    color: #333; /* نص بلون غامق */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* لضمان أن الفوتر في الأسفل */
+}
+
+.card {
+    margin: 100px 0 0 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ffffff !important; /* خلفية فاتحة */
+    border-bottom: 1px solid #e5e7eb; /* حدود ناعمة */
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .navbar-text,
+.navbar .btn-outline-dark {
+    color: #1f2937 !important; /* نص غامق */
+}
+
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
+    color: #2563eb !important; /* لون أزرق فاتح عند التمرير */
+}
+
+.btn-outline-dark {
+    border-color: #e5e7eb;
+    color: #1f2937;
+}
+
+.btn-outline-dark:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff !important;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+/* Card */
+.card {
+    background-color: #ffffff !important; /* خلفية فاتحة */
+    color: #333 !important; /* نص غامق */
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+
+
+/* Footer */
+footer {
+    background-color: #f9fafb !important; /* خلفية فاتحة */
+    color: #6b7280;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    margin-top: auto; /* هذا يضمن أن الفوتر يظل في أسفل الصفحة */
 }
