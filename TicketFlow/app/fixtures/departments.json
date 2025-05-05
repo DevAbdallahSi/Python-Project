@@ -1,0 +1,42 @@
+[
+    {
+        "model": "app.department",
+        "pk": 1,
+        "fields": {
+            "name": "IT",
+            "desc": "responsable for technical related issues",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.department",
+        "pk": 2,
+        "fields": {
+            "name": "Finance",
+            "desc": "Accounting, budgets, payroll, or financial tools",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.department",
+        "pk": 3,
+        "fields": {
+            "name": "HR",
+            "desc": "Employee relations, payroll, harassment, and work-life matters",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    },
+    {
+        "model": "app.department",
+        "pk": 4,
+        "fields": {
+            "name": "Facilities",
+            "desc": "Office infrastructure, HVAC, lighting, physical space",
+            "created_at": "2024-01-01T00:00:00Z",
+            "updated_at": "2024-01-01T00:00:00Z"
+        }
+    }
+]
