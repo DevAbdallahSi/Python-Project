@@ -144,11 +144,13 @@
                             <td>{{ticket.priority}}</td>
                             <td>
                                 <a href="/ticket/{{ ticket.id }}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
+                                {% if ticket.status.name == "Open"%}
                                 <form action="/mark_inprogress" method="post" style="display: inline;">
                                     {% csrf_token %}
                                     <input type="hidden" name="ticket_id" value="{{ticket.id}}">
                                     <button type="submit" class="btn btn-sm btn-warning" title="Mark In-progress"><i class="bi bi-check2-circle"></i></button>
                                 </form>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
@@ -175,6 +177,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const ctx = document.getElementById('ticketChart').getContext('2d');
+        const dataValues = [{{ user.department|filter_by_status:"2"|length }}, {{ user.department|filter_by_status:"4"|length }}, {{ user.department|filter_by_status:"3"|length }}];
+        const desiredMinMax = 10;
+
+        const computedMax = Math.max(...dataValues);
+        const yAxisMax = Math.max(computedMax, desiredMinMax);
         const ticketChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -190,7 +197,8 @@
                 responsive: true,
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: false,
+                        max: yAxisMax
                     }
                 }
             }

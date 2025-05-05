@@ -254,7 +254,7 @@
                         <label for="user_id">User:</label>
                         <select name="user_id">
                             {% for user in users %}
-                            {% if user.role != "admin" %}
+                            {% if user.role != "admin" and user.department %}
                             <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
                             {% endif %}
                             {% endfor %}
@@ -364,10 +364,17 @@
 
         
         {% for department in departments%}
+
+        const dataValues{{department.id}} = [{{ department|filter_by_status:"2"|length }}, {{ department|filter_by_status:"4"|length }}, {{ department|filter_by_status:"3"|length }}];
+        const desiredMinMax{{department.id}} = 10;
+
+        const computedMax{{department.id}} = Math.max(...dataValues{{department.id}});
+        const yAxisMax{{department.id}} = Math.max(computedMax{{department.id}}, desiredMinMax{{department.id}});
+
         const {{department.name}}Options = {
             type: 'bar',
             data: {
-                labels: ['Open', 'In Progress', 'Resolved'],
+                labels: ['Open', 'In Progress', 'Closed'],
                 datasets: [{
                     label: 'Tickets',
                     data: [{{ department|filter_by_status:"2"|length }}, {{ department|filter_by_status:"4"|length }}, {{ department|filter_by_status:"3"|length }}],
@@ -379,7 +386,8 @@
                 responsive: true,
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: false,
+                        max: yAxisMax{{department.id}}
                     }
                 }
             }

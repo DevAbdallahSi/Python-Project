@@ -21,5 +21,6 @@ urlpatterns = [
     path('assign',views.assign),
     path('close_ticket',views.close_ticket),
     path('mark_inprogress',views.mark_inprogress),
-    path('call_ai',views.call_ai)
+    path('call_ai',views.call_ai),
+    path('search',views.live_search)
 ]

@@ -76,7 +76,7 @@
 
           <!-- Search Box -->
           <div class="mb-4 search-box">
-            <input type="text" class="form-control" placeholder="Search for a ticket...">
+            <input type="text" id="search-input" class="form-control" placeholder="Search for a ticket..." autocomplete="off">
           </div>
 
           <!-- All Tickets Table -->
@@ -98,7 +98,7 @@
                     <th>Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="result">
                   <!-- Loop start -->
                   {% for ticket in all_tickets %}
                   <tr>
@@ -140,6 +140,8 @@
     </div>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../static/scripts/search_ticket.js"></script>
   <script>
     document.getElementById("currentYear").textContent = new Date().getFullYear();
   </script>
