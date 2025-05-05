@@ -13,7 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% load static %}
     {% load ticket_filters %}
-    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'img/logo.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
 </head>
 
@@ -99,38 +99,59 @@
                     <!-- Quick Actions & Activity Log -->
                     <div class="row g-3 mb-4">
                         <div class="col-md-4">
-                            <div class="card h-100">
-                                <div class="card-header">Quick Actions</div>
+                            <div class="card mt-0 shadow-sm h-100">
+                                <div class="card-header bg-primary text-black fw-semibold">
+                                    <i class="bi bi-lightning-fill me-2"></i>Quick Actions
+                                </div>
                                 <div class="list-group list-group-flush">
-                                    <a href="#" class="list-group-item list-group-item-action"
-                                        data-bs-toggle="modal" data-bs-target="#addDepartmentModal">Add Department</a>
-                                    <a href="#" class="list-group-item list-group-item-action"
-                                        data-bs-toggle="modal" data-bs-target="#editUserModal">Edit User Role</a>
-                                    <a href="#" class="list-group-item list-group-item-action"
-                                        data-bs-toggle="modal" data-bs-target="#assignUserToDepartmentModal">Assign user to department</a>
+                                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#addDepartmentModal">
+                                        <i class="bi bi-building-add me-2 text-primary"></i> Add Department
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#editUserModal">
+                                        <i class="bi bi-person-gear me-2 text-warning"></i> Edit User Role
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center"
+                                        data-bs-toggle="modal" data-bs-target="#assignUserToDepartmentModal">
+                                        <i class="bi bi-person-plus-fill me-2 text-success"></i> Assign User to Department
+                                    </a>
                                 </div>
                             </div>
+                            
                         </div>
                         <div class="col-md-8">
-                            <div class="card h-100">
-                                <div class="card-header">Recent Activity</div>
-                                <div class="card-body">
-                                    <textarea class="form-control" rows="5" readonly>
-    - Admin created new department
-    - Resolved ticket #102
-    - Assigned user to Support
-                                    </textarea>
+                            <div class="card mt-0 shadow-sm h-100">
+                                <div class="card-header bg-secondary text-black fw-semibold">
+                                    <i class="bi bi-clock-history me-2"></i>Recent Activity
+                                </div>
+                                <div class="card-body p-0">
+                                    <div style="height: 130px; overflow-y: auto;">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <i class="bi bi-building-fill-add text-primary me-2"></i> Admin created new department
+                                            </li>
+                                            <li class="list-group-item">
+                                                <i class="bi bi-check-circle-fill text-success me-2"></i> Resolved ticket #102
+                                            </li>
+                                            <li class="list-group-item">
+                                                <i class="bi bi-person-check-fill text-info me-2"></i> Assigned user to Support
+                                            </li>
+                                            <!-- Add more list items as needed -->
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                 
                     </div>
 
                     <!-- Charts -->
-                    <div class="row g-4 mb-4">
+                    <div class=" row flex justify-content-center mb-4 ">
 
                         {% for department in departments%}
-                        <div class="col-md-4">
-                            <div class="card">
+                        <div class="col-md-4 mt-2 ">
+                            <div class="card mt-0">
                                 <div class="card-header">{{department.name}} Department</div>
                                 <div class="card-body">
                                     <canvas id="{{department.id}}" height="180"></canvas>
@@ -142,13 +163,13 @@
                     </div>
 
                     <!-- Tickets Table -->
-                    <div class="card">
+                    <div class="card mt-0">
                         <div class="card-header">
-                            <h5 class="mb-0">Department Tickets</h5>
+                            <h5 class="mb-0">Unassigned Tickets</h5>
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table table-bordered table-hover bg-warning">
-                                <thead class="table-primary">
+                                <thead class="table-light">
                                     <tr>
                                         <th>ID</th>
                                         <th>Title</th>
@@ -175,7 +196,7 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card mt-4">
                         <div class="card-header">
                             <h5 class="mb-0">Assign Users</h5>
                         </div>
@@ -218,99 +239,115 @@
                     <h5 class="modal-title" id="addDepartmentModalLabel">Create Department</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
+    
                 <div class="modal-body">
                     <form action="/create_department" method="post">
                         {% csrf_token %}
-                        <label for="department_name">Department Name</label>
-                        <input type="text" name="department_name" required><br>
-                        <label for="description">Description</label>
-                        <input type="text" name="description" required><br>
+                        
+                        <div class="mb-3">
+                            <label for="department_name" class="form-label">Department Name</label>
+                            <input type="text" name="department_name" id="department_name" class="form-control" required>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" name="description" id="description" class="form-control" required>
+                        </div>
+    
                         <div class="modal-footer justify-content-center">
-                            <button type="submit" class="btn btn-primary"> Add Department</button>
+                            <button type="submit" class="btn btn-primary">Add Department</button>
                         </div>
                     </form>
                 </div>
-
-
             </div>
         </div>
     </div>
+    
 
     <div class="modal fade" id="editUserModal">
-
         <div class="modal-dialog modal-dialog-centered modal-md">
-
             <div class="modal-content">
-
+    
                 <div class="modal-header">
                     <h5 class="modal-title" id="editUserModalLabel">Edit User Role</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
+    
                 <div class="modal-body">
                     <form action="/change_user_role" method="post">
                         {% csrf_token %}
-                        <label for="user_id">User:</label>
-                        <select name="user_id">
-                            {% for user in users %}
-                            {% if user.role != "admin" and user.department %}
-                            <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                            {% endif %}
-                            {% endfor %}
-                        </select>
-                        <label for="role">Role</label>
-                        <select name="role">
-                            <option value="staff">Staff</option>
-                            <option value="user">User</option>
-                        </select>
+                        <div class="mb-3">
+                            <label for="user_id" class="form-label">User:</label>
+                            <select name="user_id" id="user_id" class="form-select" required>
+                                {% for user in users %}
+                                    {% if user.role != "admin" and user.department %}
+                                        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="role" class="form-label">Role</label>
+                            <select name="role" id="role" class="form-select" required>
+                                <option value="staff">Staff</option>
+                                <option value="user">User</option>
+                            </select>
+                        </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="submit" class="btn btn-primary"> Apply Role</button>
+                            <button type="submit" class="btn btn-primary">Apply Role</button>
                         </div>
                     </form>
                 </div>
-
-
+    
             </div>
         </div>
     </div>
+    
 
     <div class="modal fade" id="assignUserToDepartmentModal">
-
         <div class="modal-dialog modal-dialog-centered modal-md">
-
             <div class="modal-content">
-
+    
                 <div class="modal-header">
                     <h5 class="modal-title" id="assignUserToDepartmentModalLabel">Assign User to Department</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-
+    
                 <div class="modal-body">
                     <form action="/assign_user_to_department" method="post">
                         {% csrf_token %}
-                        <label for="user_id">User:</label>
-                        <select name="user_id">
-                            {% for user in users %}
-                            {% if user.role != "admin" %}
-                            <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
-                            {% endif %}
-                            {% endfor %}
-                        </select>
-                        <label for="department">Department</label>
-                        <select name="department_id">
-                            {% for department in departments %}
-                            <option value="{{ department.id }}">{{ department.name }}</option>
-                            {% endfor %}
-                        </select>
+    
+                        <div class="mb-3">
+                            <label for="user_id" class="form-label">User:</label>
+                            <select name="user_id" id="user_id" class="form-select" required>
+                                {% for user in users %}
+                                    {% if user.role != "admin" %}
+                                        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="department" class="form-label">Department</label>
+                            <select name="department_id" id="department" class="form-select" required>
+                                {% for department in departments %}
+                                    <option value="{{ department.id }}">{{ department.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+    
                         <div class="modal-footer justify-content-center">
-                            <button type="submit" class="btn btn-primary"> Apply Department</button>
+                            <button type="submit" class="btn btn-primary">Apply Department</button>
                         </div>
                     </form>
                 </div>
+    
             </div>
         </div>
     </div>
+    
     <div class="modal fade" id="assignUserToDepartmentTableModal">
 
         <div class="modal-dialog modal-dialog-centered modal-md">
@@ -342,7 +379,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-center py-3 bg-light mt-auto">
+    <footer class="text-center py-3 bg-light  mt-3">
         <div class="container">
             <span class="text-muted">&copy; <span id="currentYear"></span> TicketFlow. All rights reserved.</span>
         </div>
