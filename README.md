@@ -26,8 +26,8 @@ Built with Django and Bootstrap, it provides an intuitive UI and powerful backen
 - 📝 Submit, view, and update support tickets
 - 📂 Categorize tickets by department or issue type using ai
 - 🔍 Search and filter tickets
-- 🔔 Email notifications for ticket updates
-- 📊 Dashboard for users and admins and departments
+- 🔔 built-in notifications for ticket updates
+- 📊 Dashboard for users , admin , and department staff
 - 🔐 Role-based access (User, staff, Admin)
 - 💬 Ticket comments and status tracking
 
@@ -36,15 +36,6 @@ Built with Django and Bootstrap, it provides an intuitive UI and powerful backen
 ## 🛠 Tech Stack
 
 - **Backend:** Django (Python),
-- **Frontend:** Bootstrap, HTML5, CSS3
+- **Frontend:** Bootstrap, HTML5, CSS3 ,JS(AJAX)
 - **Database:** mySQL 
 - **Others:** Django Messages Framework
-
----
-
-## 📦 Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/ticketflow.git
-   cd ticketflow
