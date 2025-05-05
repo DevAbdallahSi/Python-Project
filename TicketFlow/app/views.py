@@ -332,7 +332,7 @@ def live_search(request):
     results = []
 
     if query:
-        if user.role != "admin:":
+        if user.role != "admin":
             tickets = user.department.dp_tickets.filter(
                 Q(title__icontains=query) |
                 Q(description__icontains=query)
@@ -355,5 +355,20 @@ def live_search(request):
             }
             for t in tickets
         ]
+    else:
+        tickets = models.Ticket.objects.all()
+        results = [
+            {
+                'id': t.id,
+                'title': t.title,
+                'description': t.description,
+                'status': t.status.name,
+                'created_at': t.created_at,
+                'location': t.issuer.location,
+                'issuer':t.issuer.first_name,
+                'assigned_to':t.assigned_to.name
+            }
+            for t in tickets
+        ]
     
-    return JsonResponse(list(results), safe=False)
+    return JsonResponse(list(results[::-1]), safe=False)

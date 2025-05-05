@@ -37,7 +37,16 @@ body {
   color: #2563eb !important; /* لون أزرق فاتح عند التمرير */
 }
 
+.btn-outline-dark {
+  border-color: #e5e7eb;
+  color: #1f2937;
+}
 
+.btn-outline-dark:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff !important;
+}
   main {
     margin-top: 100px;
   }
