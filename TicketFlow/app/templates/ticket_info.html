@@ -160,9 +160,7 @@
         </div>
     </div>
     <div class="modal fade" id="assign-ticket-modal">
-
         <div class="modal-dialog modal-dialog-centered modal-md">
-
             <div class="modal-content">
 
                 <div class="modal-header">
@@ -174,35 +172,46 @@
                     <form action="/assign" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="ticket_id" value="{{ticket.id}}">
-                        <label for="priority">Priority</label>
-                        <select name="priority" id="priority" required>
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
-                            <option value="critical">Critical</option>
-                        </select>
-                        <label for="department_name" >Department</label>
-                        <select name="department_name" id="department" required>
-                            {% for department in departments%}
-                            <option value="{{department.id}}">{{department.name}}</option>
-                            {% endfor %}
-                        </select>
-                        <div id="loading" class="text-center my-2" style="display: none;">
+
+                        <div class="mb-3">
+                            <label for="priority" class="form-label">Priority</label>
+                            <select name="priority" id="priority" class="form-select" required>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                                <option value="critical">Critical</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="department" class="form-label">Department</label>
+                            <select name="department_name" id="department" class="form-select" required>
+                                {% for department in departments %}
+                                <option value="{{department.id}}">{{department.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div id="loading" class="text-center my-3" style="display: none;">
                             <div class="spinner-border text-primary" role="status">
-                              <span class="visually-hidden">Loading...</span>
+                                <span class="visually-hidden">Loading...</span>
                             </div>
-                          </div>
-                        <br>
-                        <div class="modal-footer justify-content-center">
+                        </div>
+
+                        <div class="d-grid mb-2">
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </form>
+
                     <form id="ai_form">
                         {% csrf_token %}
                         <input type="hidden" id="description" value="{{ticket.description}}">
-                        <button type="submit" class="btn btn-success">Let AI decide</button>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Let AI decide</button>
+                        </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
