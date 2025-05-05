@@ -373,7 +373,6 @@
             </div>
         </div>
     </div>
-
     <!-- Footer -->
     <footer class="text-center py-3 bg-light  mt-3">
         <div class="container">
@@ -411,7 +410,7 @@
                 datasets: [{
                     label: 'Tickets',
                     data: [{{ department|filter_by_status:"2"|length }}, {{ department|filter_by_status:"4"|length }}, {{ department|filter_by_status:"3"|length }}],
-                    backgroundColor: ['#ffc107', '#0dcaf0', '#198754'],
+                    backgroundColor: ['#0d6efd', '#ffc107', '#198754'],
                     borderRadius: 5
                 }]
             },
@@ -419,7 +418,7 @@
                 responsive: true,
                 scales: {
                     y: {
-                        beginAtZero: false,
+                        beginAtZero: true,
                         max: yAxisMax{{department.id}}
                     }
                 }

@@ -27,30 +27,35 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form method="post" action="/update_user">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" id="modal-user_id">
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" id="modal-firstname" class="form-control" placeholder="First name">
+                                <input type="text" name="first_name" id="modal-firstname" class="form-control"
+                                    placeholder="First name">
                             </div>
                             <div class="col">
-                                <input type="text" id="modal-lastname" class="form-control" placeholder="Last name">
+                                <input type="text" name="last_name" id="modal-lastname" class="form-control"
+                                    placeholder="Last name">
                             </div>
                         </div>
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" id="modal-role" class="form-control" placeholder="Role">
+                                <input type="text" id="modal-role" class="form-control" placeholder="Role" disabled>
                             </div>
                             <div class="col">
-                                <input type="text" id="modal-location" class="form-control" placeholder="Location">
+                                <input type="text" id="modal-location" class="form-control" placeholder="Location"
+                                    disabled>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <input type="email" id="modal-email" class="form-control" placeholder="Email">
+                            <input type="email" name="email" id="modal-email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-primary">&lt; Save</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-primary">&lt; Save</button>
                 </div>
             </div>
         </div>
@@ -69,7 +74,11 @@
                     <p>are you sure you want to proceed ?</p>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-danger">&lt; Delete</button>
+                    <form action="/delete_user" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" id="delete-user_id">
+                        <button type="submit" class="btn btn-danger">&lt; Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -155,19 +164,16 @@
                                         <td>{{user.location}}</td>
                                         <td>
                                             <button class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#editUserModal" 
-                                                data-firstname="{{ user.first_name }}" 
-                                                data-lastname="{{ user.last_name }}" 
-                                                data-role="{{ user.role }}" 
-                                                data-location="{{ user.location }}" 
-                                                data-email="{{ user.email }}"
-                                                >Edit</button>
+                                                data-bs-target="#editUserModal" data-id="{{user.id}}"
+                                                data-firstname="{{ user.first_name }}"
+                                                data-lastname="{{ user.last_name }}" data-role="{{ user.role }}"
+                                                data-location="{{ user.location }}"
+                                                data-email="{{ user.email }}">Edit</button>
                                             {%if user.role != 'admin'%}
                                             <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteUserModal" 
-                                                data-firstname="{{ user.first_name }}" 
-                                                data-lastname="{{ user.last_name }}" 
-                                                >Delete</button>
+                                                data-bs-target="#deleteUserModal" data-id="{{user.id}}"
+                                                data-firstname="{{ user.first_name }}"
+                                                data-lastname="{{ user.last_name }}">Delete</button>
                                             {% endif %}
                                         </td>
                                     </tr>
@@ -200,6 +206,7 @@
         modaledit.addEventListener('show.bs.modal', function (event) {
             const button = event.relatedTarget; // Button that triggered the modal
             // Update modal content
+            document.getElementById('modal-user_id').value = button.getAttribute('data-id');
             document.getElementById('modal-firstname').value = button.getAttribute('data-firstname');
             document.getElementById('modal-lastname').value = button.getAttribute('data-lastname');
             document.getElementById('modal-role').value = button.getAttribute('data-role');
@@ -210,6 +217,7 @@
         modaldelete.addEventListener('show.bs.modal', function (event) {
             const button = event.relatedTarget;
             document.getElementById('username-span').innerText = `${button.getAttribute('data-firstname')}  ${button.getAttribute('data-lastname')}`
+            document.getElementById('delete-user_id').value = button.getAttribute('data-id')
         })
 
     </script>
