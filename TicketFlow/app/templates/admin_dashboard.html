@@ -174,8 +174,6 @@
                                         <th>ID</th>
                                         <th>Title</th>
                                         <th>Status</th>
-                                        <th>Priority</th>
-                                        <th>Assigned To</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -185,8 +183,6 @@
                                         <td>{{ticket.id}}</td>
                                         <td>{{ticket.title}}</td>
                                         <td><span class="badge bg-warning text-dark">{{ticket.status.name}}</span></td>
-                                        <td>{{ticket.priority}}</td>
-                                        <td>{{ticket.department.name}}</td>
                                         <td>
                                             <a href="/ticket/{{ ticket.id }}" class="btn btn-sm btn-info"><i class="bi bi-eye"></i></a>
                                         </td>
@@ -377,7 +373,6 @@
             </div>
         </div>
     </div>
-
     <!-- Footer -->
     <footer class="text-center py-3 bg-light  mt-3">
         <div class="container">
@@ -415,7 +410,7 @@
                 datasets: [{
                     label: 'Tickets',
                     data: [{{ department|filter_by_status:"2"|length }}, {{ department|filter_by_status:"4"|length }}, {{ department|filter_by_status:"3"|length }}],
-                    backgroundColor: ['#ffc107', '#0dcaf0', '#198754'],
+                    backgroundColor: ['#0d6efd', '#ffc107', '#198754'],
                     borderRadius: 5
                 }]
             },
@@ -423,7 +418,7 @@
                 responsive: true,
                 scales: {
                     y: {
-                        beginAtZero: false,
+                        beginAtZero: true,
                         max: yAxisMax{{department.id}}
                     }
                 }

@@ -100,7 +100,7 @@
                   </thead>
                   <tbody>
                     <!-- Loop start -->
-                    {% for ticket in user_tickets %}
+                    {% for ticket in user_tickets|slice:"::-1" %}
                     <tr>
                       <td>{{ ticket.id }}</td>
                       <td>{{ ticket.title }}</td>
@@ -109,7 +109,7 @@
                       <td>
                         {% if ticket.status.name == 'Closed' %}
                         <span class="badge bg-success">{{ ticket.status.name }}</span>
-                        {% elif ticket.status.name == 'In Progress' %}
+                        {% elif ticket.status.name == 'In progress' %}
                         <span class="badge bg-warning text-dark">{{ ticket.status.name }}</span>
                         {% elif ticket.status.name == 'Open' %}
                         <span class="badge bg-danger">{{ ticket.status.name }}</span>
