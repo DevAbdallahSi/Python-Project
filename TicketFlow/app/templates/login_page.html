@@ -13,16 +13,16 @@
 
 <body class="d-flex flex-column min-vh-100">
 
+    <!-- Main Content -->
     <main class="container flex-grow-1 d-flex justify-content-between">
         <div class="text-start mt-5">
             <h1 class="display-4">TicketFlow</h1>
             <p>Our Support Ticketing System is designed to streamline how we handle requests, issues, and inquiries.</p>
-            <p>We provide a centralized, organized, and efficient platform to ensure every ticket is tracked,
-                prioritized, and resolved in a timely manner.</p>
-            <p>Our goal is to enhance communication, improve service quality, and deliver reliable support to all
-                departments and users.</p>
+            <p>We provide a centralized, organized, and efficient platform to ensure every ticket is tracked, prioritized, and resolved in a timely manner.</p>
+            <p>Our goal is to enhance communication, improve service quality, and deliver reliable support to all departments and users.</p>
         </div>
 
+        <!-- Login Section -->
         <div id="login-section" class="row mt-xl-5 w-100 justify-content-center">
             <div class="col-md-6">
                 <h2 class="mb-4">Login</h2>
@@ -42,20 +42,20 @@
                             <a href="/forgot_password" class="text-decoration-none">Forgot your password?</a>
                         </div>
                     </form>
-                    <p class="text-center">Don't have an account? <button id="show-register"
-                            class="btn btn-primary">Register</button></p>
+                    <p class="text-center">Don't have an account? <button id="show-register" class="btn btn-primary">Register</button></p>
                     <div class="d-flex align-items-center my-3">
                         <hr class="flex-grow-1">
                         <span class="mx-2">OR</span>
                         <hr class="flex-grow-1">
                     </div>
                     <form action="/google">
-                        <input type="submit" value="Continue with google" class="btn btn-outline-danger w-100">
+                        <input type="submit" value="Continue with Google" class="btn btn-outline-danger w-100">
                     </form>
                 </div>
             </div>
         </div>
 
+        <!-- Register Section (Hidden by default) -->
         <div id="register-section" style="display: none;" class="container mt-3">
             <div class="row justify-content-center">
                 <div class="col-md-6">
@@ -99,6 +99,7 @@
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="bg-light text-center py-3 w-100">
         <div class="container-fluid">
             <span class="text-muted">&copy; <span id="currentYear"></span> TicketFlow. All rights reserved.</span>
