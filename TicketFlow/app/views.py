@@ -99,6 +99,9 @@ def logout(request):
     if 'user_id' in request.session:
         request.session.flush() 
         return redirect('/landing')
+    else:
+        return redirect('/landing')
+
     
 def create_department(request):
     if 'user_id' in request.session:

@@ -80,7 +80,7 @@ footer {
   .button {
     --border-right: 6px;
     --text-stroke-color: rgb(255, 255, 255);
-    --animation-color: #4c7ee3;
+    --animation-color: #ffffff;
     --fs-size: 2em;
     letter-spacing: 3px;
     text-decoration: none;
@@ -113,9 +113,6 @@ h2{
     color: white;
 }
 
-.container{
-    margin-top: 100px;
-}
 p{
     font-size:large;
     color: #ffffff;
