@@ -9,7 +9,7 @@ Built with Django and Bootstrap, it provides an intuitive UI and powerful backen
 
 ### 🏠 User Dashboard
 
-![User Dashboard](https://via.placeholder.com/800x400.png?text=User+Dashboard)
+![Screenshot 2025-05-05 182732](https://github.com/user-attachments/assets/83d44832-baca-403a-ad93-5279f307fd52)
 
 ### 🎟️ Ticket Submission Page
 
