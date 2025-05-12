@@ -5,19 +5,16 @@ Built with Django and Bootstrap, it provides an intuitive UI and powerful backen
 
 ---
 
-## 📸 Screenshots
+## Login page
+![Screenshot 2025-05-05 182815](https://github.com/user-attachments/assets/d86056a2-ae44-4ce3-9a99-7e844f2cc875)
 
 ### 🏠 User Dashboard
 
-![User Dashboard](https://via.placeholder.com/800x400.png?text=User+Dashboard)
+![Screenshot 2025-05-05 182732](https://github.com/user-attachments/assets/83d44832-baca-403a-ad93-5279f307fd52)
 
-### 🎟️ Ticket Submission Page
-
-![Ticket Form](https://via.placeholder.com/800x400.png?text=Ticket+Submission+Form)
 
 ### 📊 Admin Panel
-
-![Admin Dashboard](https://via.placeholder.com/800x400.png?text=Admin+Panel)
+![Screenshot 2025-05-11 144139](https://github.com/user-attachments/assets/dc0a2e32-c7c6-4f90-a553-cb34687d7311)
 
 ---
 

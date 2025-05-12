@@ -351,7 +351,7 @@ def live_search(request):
                 'created_at': t.created_at,
                 'location': t.issuer.location,
                 'issuer':t.issuer.first_name,
-                'assigned_to':t.assigned_to.name
+                'assigned_to': "" if t.assigned_to is None else t.assigned_to.name
             }
             for t in tickets
         ]
@@ -366,7 +366,7 @@ def live_search(request):
                 'created_at': t.created_at,
                 'location': t.issuer.location,
                 'issuer':t.issuer.first_name,
-                'assigned_to':t.assigned_to.name
+                'assigned_to': "" if t.assigned_to is None else t.assigned_to.name
             }
             for t in tickets
         ]
